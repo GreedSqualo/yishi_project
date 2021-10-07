@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+{% extends 'yishi/base.html' %}
 {% load static %}
-<html>
-    <head>
-        <title>Yishi</title>
-    </head>
 
-    <body>
-        <h1>AAAA</h1>
+{% block title_block %}
+    About
+{% endblock %}
+
+{% block body_block %}
+    <h1>AAAA</h1>
         <div>
             hey there partner! <br/>
             <strong> {{ boldmessage }} </strong>
@@ -18,6 +19,4 @@
             <img src="{{ MEDIA_URL }}cat.jpg"
                 alt="Picture of Cat" />
         </div>
-    </body>
-
-</html>
+{% endblock %}

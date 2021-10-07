@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% block css_style %}
+        {% endblock %}
+
+        <title>
+            Yishi -
+            {% block title_block %}
+                Share with us!
+            {% endblock %}
+        </title>
+    </head>
+
+    <body>
+        {% include 'yishi/header.html' %}
+
+
+        <div>
+        {% block body_block %}
+        {% endblock %}
+        </div> 
+        
+        {% include 'yishi/footer.html' %}
+    </body>
+    
+</html>
