@@ -1,15 +1,14 @@
 <!DOCTYPE html>
+{% extends 'yishi/base.html' %}
 {% load static %}
-<html>
-    <head>
-        <title>Yishi</title>
-    </head>
 
-    <body>
-        <h1>AAAA</h1>
-        <div>
-            <a href="/yishi/about/">About</a> <br/>
-        </div>
-    </body>
+{% block title_block %}
+    Search
+{% endblock %}
 
-</html>
+{% block body_block %}
+    <h1>AAAA</h1>
+    <div>
+        <a href="/yishi/about/">About</a> <br/>
+    </div>
+{% endblock %}
