@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'yishi/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Add New Product
+{% endblock %}
+
+{% block body_block %}
+    <h1>Add a New Product</h1>
+    <div>
+        <form id="product_form" method="post" action="/yishi/add_product/">
+            {% csrf_token %}
+            name: <input type="text" name="Pname"><br/>
+            price: <input type="text" name="price"><br/>
+            brand: <input type="text" name="brand"><br/>
+            description: <input type="text" name="description"><br/>
+            imges: <input type="file" name="file"><br/>
+            <button type="submit" name="add">Submit</button>
+
+        </form>
+    </div>
+{% endblock %}
