@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends 'yishi/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Result
+{% endblock %}
+
+{% block body_block %}
+    <div>
+        {% if Products %}
+            <div>
+                {% for product in Products %}
+                    {{ product.Pname }} <br/>
+                {% endfor %}
+            </div>
+        {% else %}
+            <strong>No such thing....</storng>
+        {% endif %}
+    </div>
+
+    <br/>
+    <div>
+        <a href="/yishi/about/">About</a> <br/>
+    </div>
+{% endblock %}
