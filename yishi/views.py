@@ -1,4 +1,5 @@
 from django.db.models.fields import NullBooleanField
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
@@ -12,7 +13,11 @@ def about(request):
     return render(request, 'yishi/about.html')
 
 def result(request):
-    product_list = Products.objects.all()
+    if request.method == 'POST':
+        country = request.POST.get('Country')
+        keyword = request.POST.get('ProductName')
+        print(country, keyword)
+    product_list = Products.objects.filter(Pname__icontains=keyword)
     context_dict = {}
     context_dict['Products'] = product_list
     return render(request, 'yishi/result.html', context_dict)
