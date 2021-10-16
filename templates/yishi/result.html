@@ -195,23 +195,22 @@
     <br/>
     <a href="/yishi/add_product/">Add a New Product</a> <br/>
 
-<!-- 定义放置文章标题的div容器 -->
 <div class="container">
     <div class="row mt-2">
         {% for product in Products %}
-        <!-- 文章内容 -->
+        <!-- search result -->
         <div class="col-4 mb-4">
-        <!-- 卡片容器 -->
+        <!-- card -->
             <div class="card h-100">
-                <!-- 标题 -->
+                <!-- Product name -->
                 <h4 class="card-header">{{ product.Pname }}</h4>
-                <!-- 摘要 -->
+                <!-- description -->
                 <div class="card-body">
                     <p class="card-text">{{ product.description|slice:'100' }}...</p>
                 </div>
-                <!-- 注脚 -->
+                <!-- more detail -->
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Detail</a>
+                    <a href="{% url 'yishi:detail' product.slug %}" class="btn btn-primary">Detail</a>
                 </div>
             </div>
         </div>

@@ -28,8 +28,14 @@ def result(request):
     context_dict['star_ratings'] = star_list
     return render(request, 'yishi/result.html', context_dict)
 
-def detail(request):
-    return render(request, 'yishi/detail.html')
+def detail(request, Pname_slug):
+    context_dict = {}
+    try:
+        product = Products.objects.get(slug=Pname_slug)
+        context_dict['product'] = product
+    except Products.DoesNotExist:
+        context_dict['product'] = None
+    return render(request, 'yishi/detail.html', context=context_dict)
 
 def add_product(request):
     form = ProductsForm()

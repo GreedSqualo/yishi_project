@@ -10,7 +10,7 @@
     <h1>Yishi</h1>
     <div>
         <div>
-        <form id="product_form" method="POST" action="/yishi/result/" name="search_key">
+        <form id="product_form" method="POST" action="{% url 'yishi:result' %}" name="search_key">
             {% csrf_token %}
             <select name="Country">
                 <option value="Afghanistan">Afghanistan</option>

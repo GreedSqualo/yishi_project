@@ -7,8 +7,15 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>AAAADD</h1>
-    <div>
-        <a href="/yishi/about/">About</a> <br/>
+    <!-- 文章详情 -->
+    <div class="container">
+        <div class="row">
+            <!-- 标题及作者 -->
+            <img src="{{ MEDIA_URL }}{{ product.Photo }}" style="width:200px; hight:200px;">
+            <h1 class="col-12 mt-4 mb-4">{{ product.Pname }}</h1> 
+            <div>brand：{{ product.brand }} <br/> 
+                price：{{ product.price }}</div> 
+            <div>description：{{ product.description }}</div>
+        </div>
     </div>
 {% endblock %}
