@@ -1,5 +1,3 @@
-from django.db.models.fields import NullBooleanField
-from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
@@ -14,12 +12,20 @@ def about(request):
 
 def result(request):
     if request.method == 'POST':
-        country = request.POST.get('Country')
+        country1 = request.POST.get('Country')
         keyword = request.POST.get('ProductName')
-        print(country, keyword)
+        print(country1, keyword)
     product_list = Products.objects.filter(Pname__icontains=keyword)
+    star_list = []
+    #for product in product_list:
+        #stars = star_rating.objects.filter(Pname = product.Pname)
+        #star = stars.filter(country = country1)
+        #if not star :
+        #    star_list.append(0.0)
+        #star_list.append(star.star_rating)
     context_dict = {}
     context_dict['Products'] = product_list
+    context_dict['star_ratings'] = star_list
     return render(request, 'yishi/result.html', context_dict)
 
 def detail(request):

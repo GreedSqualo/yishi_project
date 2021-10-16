@@ -194,20 +194,28 @@
     </div>
     <br/>
     <a href="/yishi/add_product/">Add a New Product</a> <br/>
-    <div>
-        {% if Products %}
-            <div>
-                {% for product in Products %}
-                    {{ product.Pname }} <br/>
-                {% endfor %}
-            </div>
-        {% else %}
-            <strong>No such thing....</storng>
-        {% endif %}
-    </div>
 
-    <br/>
-    <div>
-        <a href="/yishi/about/">About</a> <br/>
+<!-- 定义放置文章标题的div容器 -->
+<div class="container">
+    <div class="row mt-2">
+        {% for product in Products %}
+        <!-- 文章内容 -->
+        <div class="col-4 mb-4">
+        <!-- 卡片容器 -->
+            <div class="card h-100">
+                <!-- 标题 -->
+                <h4 class="card-header">{{ product.Pname }}</h4>
+                <!-- 摘要 -->
+                <div class="card-body">
+                    <p class="card-text">{{ product.description|slice:'100' }}...</p>
+                </div>
+                <!-- 注脚 -->
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Detail</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}
