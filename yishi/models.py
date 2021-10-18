@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.fields import EmailField
+from django.urls import reverse
 from django.template.defaultfilters import slugify
 
 # Create your models here.
@@ -12,6 +13,10 @@ class Products(models.Model):
     date = models.DateTimeField(auto_now=True)
     Photo = models.ImageField(upload_to='images', default='NoImage.jpg')
     slug = models.SlugField(unique=True)
+
+    def get_absolute_url(self):
+        return reverse('yishi:detail', args=[self.slug])
+    
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.Pname)

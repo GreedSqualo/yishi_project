@@ -197,13 +197,15 @@
 
 <div class="container">
     <div class="row mt-2">
-        {% for product in Products %}
+        {% for product,star in Products %}
         <!-- search result -->
         <div class="col-4 mb-4">
         <!-- card -->
             <div class="card h-100">
                 <!-- Product name -->
                 <h4 class="card-header">{{ product.Pname }}</h4>
+                <!-- star_rating -->
+                <h4 class="card-header">{{ star }}</h4>
                 <!-- description -->
                 <div class="card-body">
                     <p class="card-text">{{ product.description|slice:'100' }}...</p>

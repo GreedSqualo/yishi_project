@@ -20,4 +20,4 @@ class commentPForm(forms.ModelForm):
 
     class Meta:
         model = commentP
-        fields = ('star_rating', 'country', )
+        fields = ('star_rating', 'country', 'content')
