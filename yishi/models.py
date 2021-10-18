@@ -17,7 +17,6 @@ class Products(models.Model):
     def get_absolute_url(self):
         return reverse('yishi:detail', args=[self.slug])
     
-
     def save(self, *args, **kwargs):
         self.slug = slugify(self.Pname)
         super(Products, self).save(*args, **kwargs)
