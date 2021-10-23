@@ -42,7 +42,6 @@ def detail(request, Pname_slug):
     return render(request, 'yishi/detail.html', context=context_dict)
 
 def add_product(request):
-    form = ProductsForm()
 
     if request.method == 'POST':
         product_form = ProductsForm(request.POST)
@@ -54,8 +53,9 @@ def add_product(request):
             return redirect('/yishi/add_product/')
         else:
             print(product_form.errors)
-    
-    return render(request, 'yishi/add_product.html', {'form': form})
+    else:
+        product_form = ProductsForm()
+    return render(request, 'yishi/add_product.html', context = {'product_form': product_form})
 
 def post_commentP(request, Pname_slug):
     product = get_object_or_404(Products, slug=Pname_slug)
