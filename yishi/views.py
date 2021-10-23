@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect
 from django.http import HttpResponse
-from yishi.forms import ProductsForm, commentPForm
-from yishi.models import Products,commentP,star_rating
+from yishi.forms import ProductsForm, commentPForm, UserForm, UserProfileForm
+from yishi.models import Products,commentP,star_rating,UserProfile
 
 def index(request):
     return render(request, 'yishi/index.html')
@@ -49,7 +49,7 @@ def add_product(request):
         if product_form.is_valid():
             product = product_form.save(commit=False)
             if 'file' in request.FILES:
-                product.Photo = request.FILES.get('file')
+                product.Photo = request.FILES['file']
             product.save()
             return redirect('/yishi/add_product/')
         else:
@@ -70,3 +70,29 @@ def post_commentP(request, Pname_slug):
             return HttpResponse('Form error')
     else:
         return HttpResponse('POST only')
+
+def register(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+            profile.save()
+            registered = True
+        else:
+            print(user_form.errors, profile_form.errors)
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+    
+    return render(request, 'yishi/register.html', 
+                context = {'user_form': user_form,'profile_form': profile_form,'registered': registered}
+                )

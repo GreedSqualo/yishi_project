@@ -1,6 +1,7 @@
 from django import forms
 from django.db.models import fields
-from yishi.models import Products, commentP, star_rating
+from yishi.models import Products, UserProfile, commentP, star_rating
+from django.contrib.auth.models import User
 
 class ProductsForm(forms.ModelForm):
     class Meta:
@@ -21,3 +22,15 @@ class commentPForm(forms.ModelForm):
     class Meta:
         model = commentP
         fields = ('star_rating', 'country', 'content')
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password',)
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('dob', 'picture', 'gender', 'nationality')

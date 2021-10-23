@@ -1,5 +1,5 @@
 from django.contrib import admin
-from yishi.models import Products, commentP, star_rating
+from yishi.models import Products, commentP, star_rating, UserProfile
 
 # Register your models here.
 
@@ -9,3 +9,4 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Products, ProductAdmin)
 admin.site.register(commentP)
 admin.site.register(star_rating)
+admin.site.register(UserProfile)

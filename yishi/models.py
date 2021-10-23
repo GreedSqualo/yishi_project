@@ -1,7 +1,10 @@
 from django.db import models
 from django.db.models.fields import EmailField
+from django.db.models.fields.files import ImageField
 from django.urls import reverse
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -39,3 +42,19 @@ class commentP(models.Model):
 
     class Meta:
         verbose_name_plural = 'commentPs'
+
+class UserProfile(models.Model):
+    GENDER_OF_USER = (
+        ('FEMALE', 'Female'),
+        ('MALE', 'Male'),
+        ('OTHER', 'Other'),
+        ('SECRETE','Secrete'),
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to='profile_images', default='NoImage.jpg')
+    dob = models.DateField(blank=True)
+    gender = models.CharField(max_length=128, choices=GENDER_OF_USER, default='SECRETE')
+    nationality = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.user.username
