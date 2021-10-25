@@ -40,7 +40,8 @@ a.addNew:link,a.addNew:visited,a.addNew:hover,a.addNew:active{
 }
 
 h1.logo {
-    font-size: 450%;
+    margin-top: 2%;
+    font-size: 400%;
     font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
     color: black;
     text-align: center;

@@ -1,21 +1,58 @@
 {% extends 'yishi/base.html' %}
 {% load static %}
 
+{% block css_style %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/wordType.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/imageType.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/inputType.css">
+{% endblock %}
+
 {% block title_block %}
     Register
 {% endblock %}
 
 {% block body_block %}
-    <h1> Register for yishi </h1>
+    <h1 class="logo" > Register for yishi </h1>
     {% if registered %}
-        <strong>Thank you for registering! </strong>
+        <strong >Thank you for registering! </strong>
         <a href="{% url 'yishi:index' %}">Return to Search.</a><br/>
     {% else %}
+        <div style="text-align: center;">
         <form id="user_form" method="POST" action="{% url 'yishi:register' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            <input type="submit" name="submit" value="Register" />
+            <input type="hidden" name="csrfmiddlewaretoken" value="5K4EOqn6LczgJsuKpEqo0zPawu2R8lduXfNq36GKGpxoTLs9GO5HSGEqDSRq6b1t">
+            <p><label for="id_username">Username:</label> 
+            <input type="text" name="username" maxlength="150" required id="id_username"><br/> 
+            <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
+            
+            <p><label for="id_email">Email address:</label> 
+            <input type="email" name="email" maxlength="254" id="id_email"></p>
+
+            <p><label for="id_password">Password:</label> 
+            <input type="password" name="password" required id="id_password"></p>
+
+            <p><label for="id_dob">Dob:</label> 
+            <input type="date" name="dob" id="id_dob"></p>
+
+            <p><label for="id_picture">Picture:</label> 
+            <input type="file" name="picture" accept="image/*" id="id_picture"></p>
+            
+            <p><label for="id_gender">Gender:</label> 
+            <select name="gender" id="id_gender">
+                <option value="FEMALE">Female</option>
+                <option value="MALE">Male</option>
+                <option value="OTHER">Other</option>
+                <option value="SECRETE" selected>Secrete</option>
+            </select></p>
+
+            <p><label for="id_nationality">Nationality:</label> 
+            <input type="text" name="nationality" maxlength="128" required id="id_nationality"></p>
+
+            <input class="inputWord allTheB" type="submit" name="submit" value="Register" />
         </form>
+        </div>
     {% endif %}
 {% endblock %}
