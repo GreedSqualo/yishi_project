@@ -1,0 +1,41 @@
+a.base:link,a.base:visited {
+    font-family: 'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    font-size:120%;
+    margin-right: 10px;
+    text-decoration:none;
+    color:aliceblue;
+} 
+
+a.base:hover {
+    font-family: 'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    text-decoration:underline;
+    font-size:150%;
+    color:#3df59f;
+} 
+
+a.base:active {
+    font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    font-size:120%;
+    text-decoration:underline;
+    color:#a4ff80;
+}
+
+a.yishiHeader:link,a.yishiHeader:visited,a.yishiHeader:hover,a.yishiHeader:active{
+    font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    text-decoration: none;
+    color: white;
+    font-size: 200%;
+}
+
+h1.logo {
+    font-size: 450%;
+    font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    color: black;
+    text-align: center;
+}
+
+.inputWord {
+    font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    font-size: 20px;
+    text-align: center;
+}

@@ -7,15 +7,24 @@
 {% endblock %}
 
 {% block css_style %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/wordType.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/imageType.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/inputType.css">
 {% endblock %}
 
 {% block body_block %}
-    <h1>Yishi</h1>
+    <div style="text-align: center;">
+        <!--h1 class="logo" >Yishi</h1 -->
+        <img class="indexLogo" src="{{ MEDIA_URL }}logo2.png" alt="Logo" />
+    </div>
     <div>
-        <div>
+        <div style="text-align: center;">
         <form id="product_form" method="POST" action="{% url 'yishi:result' %}" name="search_key">
             {% csrf_token %}
-            <select name="Country">
+            <select class="indexSelect inputWord" name="Country">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
                 <option value="Algeria">Algeria</option>
@@ -190,7 +199,7 @@
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
-            <input type="search" name="ProductName"> 
+            <input class="indexSelect inputWord" type="search" name="ProductName"> 
             <button type="submit" name="Search">Go!</button>
 
         </form>

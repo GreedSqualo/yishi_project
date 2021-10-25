@@ -1,0 +1,38 @@
+/* select */
+select.indexSelect {
+    margin-top: 5%;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 1ex;
+    border-color:  #4CAF50;
+    height: 8ex;
+}
+
+/* input  */
+input.indexSelect {
+    margin-top: 5%;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 1ex;
+    border-color:  #4CAF50;
+    height: 8ex;
+    width: 80ex;
+}
+
+button {
+    font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    width: 10ex;
+    height: 5ex;
+    display: inline-block;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+}
+
+a.addNew {
+    font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    text-decoration: none;
+    color: white;
+    font-size: 200%;
+}
