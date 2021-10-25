@@ -16,7 +16,7 @@ a.base:hover {
 a.base:active {
     font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
     font-size:120%;
-    text-decoration:underline;
+    text-decoration: underline;
     color:#a4ff80;
 }
 
@@ -25,6 +25,18 @@ a.yishiHeader:link,a.yishiHeader:visited,a.yishiHeader:hover,a.yishiHeader:activ
     text-decoration: none;
     color: white;
     font-size: 200%;
+}
+
+a.addNew:link,a.addNew:visited,a.addNew:hover,a.addNew:active{
+    text-decoration: none;
+    float: right;
+    color: white;
+    background-color: #4CAF50;
+    border-style: none;
+    border-radius: 8px;
+    margin-right: 5%;
+    margin-bottom: 3%;
+    padding: 1ex;
 }
 
 h1.logo {
@@ -38,4 +50,18 @@ h1.logo {
     font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
     font-size: 20px;
     text-align: center;
+}
+
+div.result1 {
+    font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 1ex;
+    border-color:  #4CAF50;
+}
+
+.result2 {
+    border-style: solid;
+    border-width: 3px;
+    border-color:  #4CAF50;
 }

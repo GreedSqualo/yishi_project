@@ -19,20 +19,14 @@ input.indexSelect {
     width: 80ex;
 }
 
-button {
+button.allTheB {
+    margin-left: 1ex;
     font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
-    width: 10ex;
-    height: 5ex;
+    width: 12ex;
+    height: 8ex;
     display: inline-block;
-    color: #fff;
+    color: white;
     background-color: #4CAF50;
     border: none;
     border-radius: 8px;
-}
-
-a.addNew {
-    font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
-    text-decoration: none;
-    color: white;
-    font-size: 200%;
 }
