@@ -1,0 +1,27 @@
+{% extends 'yishi/base.html' %}
+{% load static %}
+
+{% block css_style %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/wordType.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/imageType.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/inputType.css">
+{% endblock %}
+
+{% block title_block %}
+    Login
+{% endblock %}
+
+{% block body_block %}
+    <h1>Login to Yishi</h1>
+    <form id="login_form" method="POST" action="{% url 'yishi:login' %}">
+        {% csrf_token %}
+        Username: <input type="text" name="username" value="" size="50" />
+        <br/>
+        Password: <input type="password" name="password" value="" size="128" />
+        <br/>
+        <button type="submit" value="submit">Login</button>
+    </form>
+{% endblock %} 

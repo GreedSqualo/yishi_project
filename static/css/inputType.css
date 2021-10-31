@@ -36,7 +36,18 @@ input.addP {
     margin-top: 5%;
     border-style: solid;
     border-radius: 5px;
-    border-width: 2px;
+    border-width: 3px;
+    border-color:  #4CAF50;
+    height: 8ex;
+    width: 80ex;
+}
+
+textarea.addP {
+    text-align: left;
+    margin-top: 5%;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 3px;
     border-color:  #4CAF50;
     height: 8ex;
     width: 80ex;

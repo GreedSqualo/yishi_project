@@ -53,6 +53,12 @@ h1.logo {
     text-align: center;
 }
 
+.inputWordBigger {
+    font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
+    font-size: 35px;
+    text-align: center;
+}
+
 div.result1 {
     font-family:'Dancing Script', cursive, "Comic Sans MS", cursive, sans-serif;
     border-style: solid;
