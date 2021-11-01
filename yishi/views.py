@@ -1,9 +1,11 @@
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect
-from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponse
-from yishi.forms import ProductsForm, commentPForm, UserForm, UserProfileForm
+from yishi.forms import AdviceForm, ProductsForm, commentPForm, UserForm, UserProfileForm
 from yishi.models import Products,commentP,star_rating,UserProfile
 
 def index(request):
@@ -116,3 +118,26 @@ def user_login(request):
             return HttpResponse("Invalid login detail supplied.")
     else:
         return render(request, 'yishi/login.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('yishi:index'))
+
+def advice(request):
+    if request.method == 'POST':
+        advice_form = AdviceForm(request.POST)
+
+        if advice_form.is_valid():
+            advice = advice_form.save()
+            advice.save()
+            # messages.success(request, 'Thank you for your advice !' )
+        else:
+            print(advice_form.errors)
+    else:
+        advice_form = AdviceForm()
+    return render(request, 'yishi/advice.html', context={'advice_form': advice_form})
+
+@login_required
+def profile(request):
+    return HttpResponse("lalala!")

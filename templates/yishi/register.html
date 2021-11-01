@@ -23,7 +23,6 @@
         <div style="text-align: center;">
         <form id="user_form" method="POST" action="{% url 'yishi:register' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="hidden" name="csrfmiddlewaretoken" value="5K4EOqn6LczgJsuKpEqo0zPawu2R8lduXfNq36GKGpxoTLs9GO5HSGEqDSRq6b1t">
             <p><label for="id_username">Username:</label> 
             <input type="text" name="username" maxlength="150" required id="id_username"><br/> 
             <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>

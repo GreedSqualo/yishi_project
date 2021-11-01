@@ -12,16 +12,25 @@
 {% endblock %}
 
 {% block title_block %}
-    About
+    Advice
 {% endblock %}
 
 {% block body_block %}
-    <h1 class="logo">Thank you for using Yishi !</h1>
-        <div>
-            Any advice: <br/>
-            <a href="{% url 'yishi:advice' %}">Advice</a>
-        </div>
-        <div>
-            <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of Cat" />
-        </div>
+
+    <h1 class="logo" >Post you advice:</h1>
+    <div style="text-align: center;">
+        <form id="advice_form" method="post" action="/yishi/advice/" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ advice_form.as_p }}
+            <button class="inputWord allTheB" type="submit" name="submit" value="Add">Submit</button>
+        </form>
+    </div>
+    {% if messages %}
+    <script>
+        {% for msg in messages %}
+            alert('{{ msg.message }}');
+        {% endfor %}
+    </script>
+    {% endif %}
+    
 {% endblock %}

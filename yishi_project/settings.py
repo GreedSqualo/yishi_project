@@ -140,3 +140,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # media
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
+#login
+LOGIN_URL = 'yishi:login'

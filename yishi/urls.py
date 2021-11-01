@@ -12,4 +12,7 @@ urlpatterns = [
     path('post_commentP/<slug:Pname_slug>/', views.post_commentP, name='post_commentP'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
+    path('advice/', views.advice, name='advice'),
+    path('profile/', views.profile, name='profile'),
 ]

@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.fields import EmailField
 from django.db.models.fields.files import ImageField
 from django.urls import reverse
-from django.template.defaultfilters import slugify
+from django.template.defaultfilters import slugify, title
 from django.contrib.auth.models import User
 
 
@@ -58,3 +58,13 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Advice(models.Model):
+    STATE_OF_ADVICE = (
+        ('ACTIVE', 'active'),
+        ('DEALED', 'dealed'),
+        ('UNACCEPTED', 'unaccepted')
+    )
+    title = models.CharField(max_length=128, blank=False)
+    content = models.TextField(max_length=1024, blank=False)
+    state = models.CharField(max_length=128, choices=STATE_OF_ADVICE, default='ACTIVE')

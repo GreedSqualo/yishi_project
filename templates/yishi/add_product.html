@@ -20,7 +20,6 @@
     <div style="text-align: center;">
         <form id="product_form" method="post" action="/yishi/add_product/" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="hidden" name="csrfmiddlewaretoken" value="pX9ucM0OlW5ENdHggj8fWGNPBDsXsduDhsSgrsjsg93MXwFFxtNyONC5I1hwq3iC">
             <p><label class="inputWordBigger" for="id_Pname">Pname:</label> 
             <input class="inputWord addP" type="text" name="Pname" maxlength="512" required id="id_Pname"></p>
             

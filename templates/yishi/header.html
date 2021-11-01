@@ -9,10 +9,15 @@
     <div>
       <ul class="navbar-nav">
         <!-- item -->
-          <li><a class="base" href="{% url 'yishi:index' %}">Search</a></li>
+        <li><a class="base" href="{% url 'yishi:index' %}">Search</a></li>
+        {% if user.is_authenticated %}
           <li><a class="base" href="#">Buy together</a></li>
+          <li><a class="base" href="#">Profile</a></li>
+          <li><a class="base" href="{% url 'yishi:logout' %}">Logout</a></li>
+        {% else %}
           <li><a class="base" href="{% url 'yishi:login' %}">Login</a></li>
-          <li><a class="base" href="{% url 'yishi:register' %}">Sign up</a></li>
+          <li><a class="base" href="{% url 'yishi:register' %}">Register</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>
