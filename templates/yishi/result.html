@@ -9,6 +9,18 @@
     <link rel="stylesheet" type="text/css" href="/static/css/wordType.css">
     <link rel="stylesheet" type="text/css" href="/static/css/imageType.css">
     <link rel="stylesheet" type="text/css" href="/static/css/inputType.css">
+
+        <script>
+        function changeCountry(country){
+            var all_options = document.getElementById("countryMenu").options;
+            for(i=0;i<all_options.length;i++){
+                if(all_options[i].value == country){
+                    all_options[i].selected = true;
+                }
+            }
+        };
+    </script>
+
 {% endblock %}
 
 {% block title_block %}
@@ -20,7 +32,7 @@
         <div style="text-align: center;">
         <form id="product_form" method="POST" action="/yishi/result/" name="search_key">
             {% csrf_token %}
-            <select class="indexSelect inputWord" name="Country">
+            <select class="indexSelect inputWord" id="countryMenu" name="Country" onchange="changeCountry("China")">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
                 <option value="Algeria">Algeria</option>

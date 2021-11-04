@@ -24,6 +24,7 @@
         <div style="text-align: center;">
         <form id="product_form" method="POST" action="{% url 'yishi:result' %}" name="search_key">
             {% csrf_token %}
+            <label class="inputWordBigger" for="id_Pname">Where are you come from:</label>
             <select class="indexSelect inputWord" name="Country">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
@@ -199,7 +200,8 @@
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
-            <input class="indexSelect inputWord" type="search" name="ProductName"> 
+            <br/>
+            <input class="indexSelect inputWord" type="search" name="ProductName" placeholder="Search for product name, rice, milk, etc."> 
             <button class="inputWord allTheB" type="submit" name="Search">Go !</button>
 
         </form>

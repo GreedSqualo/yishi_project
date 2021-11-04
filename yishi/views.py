@@ -46,7 +46,6 @@ def detail(request, Pname_slug):
     return render(request, 'yishi/detail.html', context=context_dict)
 
 def add_product(request):
-
     if request.method == 'POST':
         product_form = ProductsForm(request.POST)
         if product_form.is_valid():
@@ -54,6 +53,7 @@ def add_product(request):
             if 'file' in request.FILES:
                 product.Photo = request.FILES['file']
             product.save()
+            messages.success(request, 'Thank you for adding a new product !')
             return redirect('/yishi/add_product/')
         else:
             print(product_form.errors)
@@ -125,18 +125,19 @@ def user_logout(request):
     return redirect(reverse('yishi:index'))
 
 def advice(request):
+    adviced = False
     if request.method == 'POST':
         advice_form = AdviceForm(request.POST)
 
         if advice_form.is_valid():
             advice = advice_form.save()
             advice.save()
-            # messages.success(request, 'Thank you for your advice !' )
+            adviced = True
         else:
             print(advice_form.errors)
     else:
         advice_form = AdviceForm()
-    return render(request, 'yishi/advice.html', context={'advice_form': advice_form})
+    return render(request, 'yishi/advice.html', context={'advice_form': advice_form, 'adviced': adviced})
 
 @login_required
 def profile(request):

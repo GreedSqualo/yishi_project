@@ -17,20 +17,17 @@
 
 {% block body_block %}
 
-    <h1 class="logo" >Post you advice:</h1>
-    <div style="text-align: center;">
-        <form id="advice_form" method="post" action="/yishi/advice/" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ advice_form.as_p }}
-            <button class="inputWord allTheB" type="submit" name="submit" value="Add">Submit</button>
-        </form>
-    </div>
-    {% if messages %}
-    <script>
-        {% for msg in messages %}
-            alert('{{ msg.message }}');
-        {% endfor %}
-    </script>
+    {% if adviced %}
+        <strong >Thank you for advice! </strong>
+        <a href="{% url 'yishi:index' %}">Return to Search.</a><br/>
+    {% else %}
+        <h1 class="logo" >Post you advice:</h1>
+        <div style="text-align: center;">
+            <form id="advice_form" method="post" action="/yishi/advice/" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ advice_form.as_p }}
+                <button class="inputWord allTheB" type="submit" name="submit" value="Add">Submit</button>
+            </form>
+        </div>
     {% endif %}
-    
 {% endblock %}
