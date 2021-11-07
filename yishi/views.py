@@ -3,10 +3,12 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.urls import reverse
 from django.http import HttpResponse
 from yishi.forms import AdviceForm, ProductsForm, commentPForm, UserForm, UserProfileForm
 from yishi.models import Products,commentP,star_rating,UserProfile
+import json
 
 def index(request):
     return render(request, 'yishi/index.html')
@@ -29,7 +31,7 @@ def result(request):
     information = zip(product_list, star_list)
     context_dict = {}
     context_dict['Products'] = information
-    context_dict['country'] = country1
+    context_dict['country'] = json.dumps(country1)
     return render(request, 'yishi/result.html', context_dict)
 
 def detail(request, Pname_slug):
@@ -56,7 +58,7 @@ def add_product(request):
             messages.success(request, 'Thank you for adding a new product !')
             return redirect('/yishi/add_product/')
         else:
-            print(product_form.errors)
+            print(product_form.errors) 
     else:
         product_form = ProductsForm()
     return render(request, 'yishi/add_product.html', context = {'product_form': product_form})
@@ -139,6 +141,7 @@ def advice(request):
         advice_form = AdviceForm()
     return render(request, 'yishi/advice.html', context={'advice_form': advice_form, 'adviced': adviced})
 
-@login_required
+@login_required(login_url='yishi/login/')
 def profile(request):
+
     return HttpResponse("lalala!")

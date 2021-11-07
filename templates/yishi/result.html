@@ -9,18 +9,6 @@
     <link rel="stylesheet" type="text/css" href="/static/css/wordType.css">
     <link rel="stylesheet" type="text/css" href="/static/css/imageType.css">
     <link rel="stylesheet" type="text/css" href="/static/css/inputType.css">
-
-        <script>
-        function changeCountry(country){
-            var all_options = document.getElementById("countryMenu").options;
-            for(i=0;i<all_options.length;i++){
-                if(all_options[i].value == country){
-                    all_options[i].selected = true;
-                }
-            }
-        };
-    </script>
-
 {% endblock %}
 
 {% block title_block %}
@@ -32,8 +20,8 @@
         <div style="text-align: center;">
         <form id="product_form" method="POST" action="/yishi/result/" name="search_key">
             {% csrf_token %}
-            <select class="indexSelect inputWord" id="countryMenu" name="Country" onchange="changeCountry("China")">
-                <option value="Afghanistan">Afghanistan</option>
+            <select class="indexSelect inputWord" id="countryMenu" name="Country">
+                <option value="Afghanistan" >Afghanistan</option>
                 <option value="Albania">Albania</option>
                 <option value="Algeria">Algeria</option>
                 <option value="Andorra">Andorra</option>
@@ -209,11 +197,24 @@
             </select>
             <input class="indexSelect inputWord" type="search" name="ProductName"> 
             <button class="inputWord allTheB" type="submit" name="Search">Go!</button>
-
         </form>
+        <script type="text/javascript">
+            var country1 = {{ country|safe }};
+            function changeCountry(coun){
+                //alert(coun)
+                var all_options = document.getElementById("countryMenu").options;
+                for(i=0;i<all_options.length;i++){
+                    if(all_options[i].value == coun){
+                        all_options[i].selected = true;
+                    }
+                }
+            };
+            changeCountry(country1);
+        </script>
         </div>
     </div>
     <br/>
+    <label class="inputWordSmall" for="id_Pname">Didn't find it? Add by yourself →</label>
     <a class="addNew inputWord" href="/yishi/add_product/">Add a New Product</a> <br/>
 
 <div class="container" style="margin-top: 5%;">
@@ -237,6 +238,11 @@
                 </div>
             </div>
         </div>
+        {% empty %}
+            <div>
+                Didn't find what you were looking for?<br/>
+                Add a new product by yourself or check the spelling...
+            </div>
         {% endfor %}
     </div>
 </div>
