@@ -11,7 +11,7 @@
         <!-- item -->
         <li><a class="base" href="{% url 'yishi:index' %}">Search</a></li>
         {% if user.is_authenticated %}
-          <li><a class="base" href="#">Buy together</a></li>
+          <li><a class="base" href="{% url 'yishi:buyTogether' %}">Buy together</a></li>
           <li><a class="base" href="{% url 'yishi:profile' %}">Profile</a></li>
           <li><a class="base" href="{% url 'yishi:logout' %}">Logout</a></li>
         {% else %}

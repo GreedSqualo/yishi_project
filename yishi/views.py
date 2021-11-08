@@ -72,6 +72,8 @@ def post_commentP(request, Pname_slug):
             new_comment = comment_form.save(commit=False)
             new_comment.Pname = Products.objects.get(slug=Pname_slug)
             new_comment.save()
+            # countryC = request.POST['country']
+            # star_ratingP = star_rating.objects.get()
             return redirect(product)
         else:
             return HttpResponse('Form error')
@@ -184,3 +186,8 @@ def profile(request):
     context_dict['user'] = users
     context_dict['userProfile'] = userProfile
     return render(request, 'yishi/profile.html', context=context_dict)
+
+@login_required
+def buyTogether(request):
+
+    return render(request, 'yishi/buyTogether.html')
