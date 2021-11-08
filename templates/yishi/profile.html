@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends 'yishi/base.html' %}
 {% load static %}
 
@@ -11,30 +12,41 @@
 {% endblock %}
 
 {% block title_block %}
-    Register
+    Result
 {% endblock %}
 
 {% block body_block %}
-    <h1 class="logo" > Register for yishi </h1>
-    {% if registered %}
-        <strong >Thank you for registering! </strong>
-        <a href="{% url 'yishi:index' %}">Return to Search.</a><br/>
-    {% else %}
+    <div class="container">
+        <div class="row">
+            <!-- Pname and other information -->
+            <img src="{{ MEDIA_URL }}{{ userProfile.picture }}" style="width:200px; hight:200px;">
+            <div>
+                name: {{ user.username }} <br/>
+                email: {{ user.email }} <br/>
+                date of birth：{{ userProfile.dob }} <br/> 
+                gender：{{ userProfile.gender }} <br/>
+                nationality：{{ userProfile.nationality }}
+            </div>
+            <a hr>
+        </div>
+
         <div style="text-align: center;">
-        <form id="user_form" method="POST" action="{% url 'yishi:register' %}" enctype="multipart/form-data">
+        <form id="user_form" method="POST" action="{% url 'yishi:profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
+            <p><label for="id_email">Edit your profile:</label><br/>
+
             <p><label for="id_username">Username:</label> 
             <input type="text" name="username" maxlength="150" required id="id_username"><br/> 
             <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
-            
+
             <p><label for="id_email">Email address:</label> 
             <input type="email" name="email" maxlength="254" id="id_email"></p>
 
+            <p><label for="id_dob">Dob:</label> 
+            <input type="date" name="dob" id="id_dob" ></p>
+
             <p><label for="id_password">Password:</label> 
             <input type="password" name="password" required id="id_password"></p>
-
-            <p><label for="id_dob">Dob:</label> 
-            <input type="date" name="dob" id="id_dob"></p>
 
             <p><label for="id_picture">Picture:</label> 
             <input type="file" name="picture" accept="image/*" id="id_picture"></p>
@@ -48,7 +60,7 @@
             </select></p>
 
             <p><label for="id_nationality">Nationality:</label> 
-            <select class="indexSelect inputWord" name="nationality" maxlength="128" required name="Country" id="id_nationality">
+            <select class="indexSelect inputWord" name="nationality" maxlength="128" required id="id_nationality">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
                 <option value="Algeria">Algeria</option>
@@ -223,10 +235,7 @@
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
-            </p>
-
-            <input class="inputWord allTheB" type="submit" name="submit" value="Register" />
-        </form>
-        </div>
-    {% endif %}
+            <br/>
+        <input class="inputWord allTheB" type="submit" name="submit" value="edit" />
+    </div>
 {% endblock %}

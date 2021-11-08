@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.urls import reverse
 from django.http import HttpResponse
@@ -141,7 +142,45 @@ def advice(request):
         advice_form = AdviceForm()
     return render(request, 'yishi/advice.html', context={'advice_form': advice_form, 'adviced': adviced})
 
-@login_required(login_url='yishi/login/')
+@login_required
 def profile(request):
+    context_dict = {}
+    try:
+        currentUser = request.user
+        users = User.objects.get( username=currentUser )
+        userProfile = UserProfile.objects.get(user=users)
+    except User.DoesNotExist:
+        return HttpResponse("User don't find.")
+    except UserProfile.DoesNotExist :
+        return HttpResponse("Profile don't find.")
 
-    return HttpResponse("lalala!")
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+        if profile_form.is_valid() and user_form.is_valid():
+            users.username = request.POST['username']
+            users.email = request.POST['email']
+            users.password = request.POST['password']
+            users.set_password(users.password)
+            users.save()
+            userProfile.dob = request.POST['dob']
+            userProfile.gender = request.POST['gender']
+            userProfile.nationality = request.POST['nationality']
+            if 'picture' in request.FILES:
+                userProfile.picture = request.FILES['picture']
+            userProfile.save()
+            return redirect("yishi:profile")
+        else :
+            print(user_form.cleaned_data)
+            print(profile_form.cleaned_data)
+            print(user_form.errors)
+            print(profile_form.errors)
+            return HttpResponse("Register form error, input again.")
+    elif request.method == "GET":
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+        context_dict['user'] = users
+        context_dict['profile_form'] = profile_form
+    context_dict['user'] = users
+    context_dict['userProfile'] = userProfile
+    return render(request, 'yishi/profile.html', context=context_dict)
