@@ -157,27 +157,40 @@ def profile(request):
         return HttpResponse("Profile don't find.")
 
     if request.method == 'POST':
-        user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
-        if profile_form.is_valid() and user_form.is_valid():
-            users.username = request.POST['username']
-            users.email = request.POST['email']
-            users.password = request.POST['password']
-            users.set_password(users.password)
-            users.save()
-            userProfile.dob = request.POST['dob']
-            userProfile.gender = request.POST['gender']
-            userProfile.nationality = request.POST['nationality']
-            if 'picture' in request.FILES:
-                userProfile.picture = request.FILES['picture']
-            userProfile.save()
-            return redirect("yishi:profile")
-        else :
-            print(user_form.cleaned_data)
-            print(profile_form.cleaned_data)
-            print(user_form.errors)
-            print(profile_form.errors)
-            return HttpResponse("Register form error, input again.")
+        # user_form = UserForm(request.POST)
+        # profile_form = UserProfileForm(request.POST)
+        users.username = request.POST['username']
+        users.email = request.POST['email']
+        users.password = request.POST['password']
+        users.set_password(users.password)
+        users.save()
+        userProfile.dob = request.POST['dob']
+        userProfile.gender = request.POST['gender']
+        userProfile.nationality = request.POST['nationality']
+        if 'picture' in request.FILES:
+            userProfile.picture = request.FILES['picture']
+        userProfile.save()
+        return redirect("yishi:profile")
+
+        #if profile_form.is_valid() and user_form.is_valid():
+        #    users.username = request.POST['username']
+        #    users.email = request.POST['email']
+        #    users.password = request.POST['password']
+        #    users.set_password(users.password)
+        #    users.save()
+        #    userProfile.dob = request.POST['dob']
+        #    userProfile.gender = request.POST['gender']
+        #    userProfile.nationality = request.POST['nationality']
+        #    if 'picture' in request.FILES:
+        #        userProfile.picture = request.FILES['picture']
+        #    userProfile.save()
+        #    return redirect("yishi:profile")
+        #else :
+        #    print(user_form.cleaned_data)
+        #    print(profile_form.cleaned_data)
+        #    print(user_form.errors)
+        #    print(profile_form.errors)
+        #    return HttpResponse("Register form error, input again.")
     elif request.method == "GET":
         user_form = UserForm()
         profile_form = UserProfileForm()

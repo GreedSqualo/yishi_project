@@ -68,3 +68,7 @@ class Advice(models.Model):
     title = models.CharField(max_length=128, blank=False)
     content = models.TextField(max_length=1024, blank=False)
     state = models.CharField(max_length=128, choices=STATE_OF_ADVICE, default='ACTIVE')
+
+#class BuyInfo(models.Model):
+#    user = models.ForeignKey('User', on_delete=models.CASCADE)
+#    position = models.CharField(max_length=128)

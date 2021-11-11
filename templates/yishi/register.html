@@ -228,5 +228,16 @@
             <input class="inputWord allTheB" type="submit" name="submit" value="Register" />
         </form>
         </div>
+
+        <div>
+        <label>By creating an account you agree to Yishi's</label>
+        <a href="#">Condition of Use.</a>
+        <label>Please see our </label>
+        <a href="#">Privacy Agreement</a>, and
+        <a href="#">Cookies Notice</a>.
+        <br/>
+        <label> Already have account? </label>
+        <a href="{% url 'yishi:login' %}">Login !</a>
+        </div>
     {% endif %}
 {% endblock %}

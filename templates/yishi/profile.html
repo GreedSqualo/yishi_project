@@ -23,7 +23,7 @@
             <div>
                 name: {{ user.username }} <br/>
                 email: {{ user.email }} <br/>
-                date of birth：{{ userProfile.dob }} <br/> 
+                date of birth：{{ userProfile.dob }} <br/>
                 gender：{{ userProfile.gender }} <br/>
                 nationality：{{ userProfile.nationality }}
             </div>
@@ -36,17 +36,18 @@
             <p><label for="id_email">Edit your profile:</label><br/>
 
             <p><label for="id_username">Username:</label> 
-            <input type="text" name="username" maxlength="150" required id="id_username"><br/> 
+            <input type="text" name="username" maxlength="150" required id="id_username" value="{{ user.username }}"><br/> 
             <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
 
-            <p><label for="id_email">Email address:</label> 
-            <input type="email" name="email" maxlength="254" id="id_email"></p>
 
-            <p><label for="id_dob">Dob:</label> 
+            <p><label for="id_email">Email address:</label> 
+            <input type="email" name="email" maxlength="254" id="id_email" value="{{ user.email }}"></p>
+
+            <p><label for="id_dob" value=" {{ userProfile.dob }} ">Dob:</label>
             <input type="date" name="dob" id="id_dob" ></p>
 
             <p><label for="id_password">Password:</label> 
-            <input type="password" name="password" required id="id_password"></p>
+            <input type="password" name="password" required id="id_password" {{ user.password }}></p>
 
             <p><label for="id_picture">Picture:</label> 
             <input type="file" name="picture" accept="image/*" id="id_picture"></p>
