@@ -13,7 +13,9 @@
             <!-- Pname and other information -->
             <img src="{{ MEDIA_URL }}{{ product.Photo }}" style="width:200px; hight:200px;">
             <h1 class="col-12 mt-4 mb-4">{{ product.Pname }}</h1> 
-            <div>brand：{{ product.brand }} <br/> 
+            <div>
+                rate: {{ rate }} <br/>
+                brand：{{ product.brand }} <br/> 
                 price：{{ product.price }}￡</div> 
             <div>description：{{ product.description }}</div>
         </div>
@@ -199,14 +201,27 @@
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
             </select><br/>
-            star_rating:<input type="text" name="star_rating" id="star_rating">
+            star_rating:<input type="number" min="0" max="5" name="star_rating" id="star_rating">
             <p> Conmment: </p>
             <textarea type="text" id="content" name="content" rows="2"></textarea>
             <button type="submit" name="addCommentP">Submit</button>
         </form>
+        <script type="text/javascript">
+            var country1 = {{ country|safe }};
+            function changeCountry(coun){
+                //alert(coun)
+                var all_options = document.getElementById("country").options;
+                for(i=0;i<all_options.length;i++){
+                    if(all_options[i].value == coun){
+                        all_options[i].selected = true;
+                    }
+                }
+            };
+            changeCountry(country1);
+        </script>
     </div>
 
-    <h4 >comments in total: </h4>
+    <h4 >{{ n }} comments in total: </h4>
     {% if comments %}
     <div >
         {% for comment in comments %}

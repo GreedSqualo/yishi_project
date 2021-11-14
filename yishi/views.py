@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 from yishi.forms import AdviceForm, ProductsForm, commentPForm, UserForm, UserProfileForm
 from yishi.models import Products,commentP,star_rating,UserProfile
-import json
+import json, string
 
 def index(request):
     return render(request, 'yishi/index.html')
@@ -35,17 +35,27 @@ def result(request):
     context_dict['country'] = json.dumps(country1)
     return render(request, 'yishi/result.html', context_dict)
 
-def detail(request, Pname_slug):
+def detail(request, Pname_slug, countryS):
     context_dict = {}
+    punctuation_string = string.punctuation
+    for i in punctuation_string:
+        countryS = countryS.replace(i, '')
     try:
         product = Products.objects.get(slug=Pname_slug)
-        comment_list = commentP.objects.filter(Pname=product.Pname)
+        comment_list = commentP.objects.filter(Pname=product.Pname, country=countryS)
+        star = star_rating.objects.get(Pname = product.Pname, country=countryS)
         context_dict['product'] = product
         context_dict['comments'] = comment_list
+        context_dict['rate'] = star.star_rating
+        context_dict['n'] = star.n
     except Products.DoesNotExist :
         context_dict['product'] = None
     except commentP.DoesNotExist :
         context_dict['comments'] = None
+    except star_rating.DoesNotExist:
+        context_dict['rate'] = 0.0
+        context_dict['n'] = 0
+    context_dict['country'] = json.dumps(countryS)
     return render(request, 'yishi/detail.html', context=context_dict)
 
 def add_product(request):
@@ -72,8 +82,19 @@ def post_commentP(request, Pname_slug):
             new_comment = comment_form.save(commit=False)
             new_comment.Pname = Products.objects.get(slug=Pname_slug)
             new_comment.save()
-            # countryC = request.POST['country']
-            # star_ratingP = star_rating.objects.get()
+            countryC = request.POST['country']
+            rate = request.POST['star_rating']
+            rate = float(rate) 
+            try:
+                star_ratingP = star_rating.objects.get(Pname=product, country=countryC)
+                print(star_ratingP.star_rating)
+                star_ratingP.star_rating = (star_ratingP.star_rating * star_ratingP.n + rate)/(star_ratingP.n + 1)
+                star_ratingP.n = star_ratingP.n + 1
+                star_ratingP.save()
+                print(star_ratingP.star_rating)
+                print(star_ratingP.n)
+            except star_rating.DoesNotExist :
+                star_rating.objects.create(Pname=product, country=countryC, star_rating=rate, n=1)
             return redirect(product)
         else:
             return HttpResponse('Form error')
