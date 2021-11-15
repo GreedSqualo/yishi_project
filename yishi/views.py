@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.urls import reverse
 from django.http import HttpResponse
 from yishi.forms import AdviceForm, ProductsForm, commentPForm, UserForm, UserProfileForm
-from yishi.models import Products,commentP,star_rating,UserProfile
+from yishi.models import BuyInfo, Products,commentP,star_rating,UserProfile
 import json, string
 
 def index(request):
@@ -204,5 +204,9 @@ def profile(request):
 
 @login_required
 def buyTogether(request):
-
-    return render(request, 'yishi/buyTogether.html')
+    context_dict = {}
+    if request.method == 'POST':
+        keyword = request.POST.get('KeyWord')
+        BuyInfo_list = BuyInfo.objects.filter(Q(supermarket__icontains=keyword)|Q(position__icontains=keyword)|Q(postcode__icontains=keyword))
+        context_dict['BuyInfos'] = BuyInfo_list
+    return render(request, 'yishi/buyTogether.html', context_dict)

@@ -45,7 +45,7 @@ class BuyInfoForm(forms.ModelForm):
         model = BuyInfo
         fields = ('supermarket', 'position', 'postcode', 'time', 'describsion')
 
-class commentPForm(forms.ModelForm):
+class commentBForm(forms.ModelForm):
     class Meta:
         model = commentB
-        fields = ('content')
+        fields = ('content', )

@@ -15,9 +15,40 @@
 {% endblock %}
 
 {% block body_block %}
-    <p> lalalala </p>
-    <form>
-        <input class="indexSelect inputWord" type="search" name="ProductName" placeholder="Search for product name, rice, milk, etc."> 
+    <form id="product_form" method="POST" action="/yishi/buyTogether/" name="KeyWord">
+        <input class="indexSelect inputWord" type="search" name="KeyWord" placeholder=" Postcode, name of the supermarket, etc."> 
         <button class="inputWord allTheB" type="submit" name="Search">Go !</button>
     </form>
+
+    <label class="inputWordSmall" for="id_Pname">Didn't find it? Add by yourself →</label>
+    <a class="addNew inputWord" href="#">Post Order Information</a> <br/>
+
+<div class="container" style="margin-top: 5%;">
+    <div class="row mt-2 ">
+        {% for bi in BuyInfos %}
+        <!-- search result -->
+        <div class="col-4 mb-4 ">
+        <!-- card -->
+            <div class="card h-100 result1">
+                <!-- Product name -->
+                <h4 class="card-header result2">{{ bi.supermarket }}</h4>
+                <!-- star_rating -->
+                <h4 class="card-header result2">{{ bi.postcode }}</h4>
+                <!-- description -->
+                <div class="card-body result2">
+                    <p class="card-text">{{ bi.time }}...</p>
+                </div>
+                <!-- more detail -->
+                <div class="card-footer result2">
+                    <a class="addNew inputWord" href="#" class="btn btn-primary">Detail</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <div>
+                Didn't find what you were looking for?<br/>
+                Post the order information by yourself or check the spelling...
+            </div>
+        {% endfor %}
+
 {% endblock %}
