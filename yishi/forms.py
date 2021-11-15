@@ -1,6 +1,6 @@
 from django import forms
 from django.db.models import fields
-from yishi.models import Products, UserProfile, commentP, star_rating, Advice
+from yishi.models import Products, UserProfile, commentP, star_rating, Advice, BuyInfo, commentB
 from django.contrib.auth.models import User
 
 class ProductsForm(forms.ModelForm):
@@ -39,3 +39,13 @@ class AdviceForm(forms.ModelForm):
     class Meta:
         model = Advice
         fields = ('title', 'content', 'state')
+
+class BuyInfoForm(forms.ModelForm):
+    class Meta:
+        model = BuyInfo
+        fields = ('supermarket', 'position', 'postcode', 'time', 'describsion')
+
+class commentPForm(forms.ModelForm):
+    class Meta:
+        model = commentB
+        fields = ('content')

@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.fields import EmailField
 from django.db.models.fields.files import ImageField
+from django.db.models.fields.related import ForeignKey
 from django.urls import reverse
 from django.template.defaultfilters import slugify, title
 from django.contrib.auth.models import User
@@ -51,10 +52,7 @@ class UserProfile(models.Model):
         ('SECRETE','Secrete'),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='profile_images', default='NoImage.jpg')
-    dob = models.DateField(blank=True)
-    gender = models.CharField(max_length=128, choices=GENDER_OF_USER, default='SECRETE')
-    nationality = models.CharField(max_length=128)
+
 
     def __str__(self):
         return self.user.username
@@ -69,6 +67,23 @@ class Advice(models.Model):
     content = models.TextField(max_length=1024, blank=False)
     state = models.CharField(max_length=128, choices=STATE_OF_ADVICE, default='ACTIVE')
 
-#class BuyInfo(models.Model):
-#    user = models.ForeignKey('User', on_delete=models.CASCADE)
-#    position = models.CharField(max_length=128)
+class BuyInfo(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    supermarket = models.CharField(max_length=128, blank=True)
+    position = models.CharField(max_length=128, blank=True)
+    time = models.DateField(blank=True)
+    postcode = models.CharField(max_length=128, blank=True)
+    describsion = models.TextField(max_length=512, blank=False)
+
+    def get_absolute_url(self):
+        return reverse('yishi:detail')
+
+class commentB(models.Model):
+    Bid = ForeignKey('BuyInfo', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    content = models.TextField(max_length=512)
+
+    class Meta:
+        verbose_name_plural = 'commentPs'
