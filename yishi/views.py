@@ -7,8 +7,9 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.urls import reverse
 from django.http import HttpResponse
-from yishi.forms import AdviceForm, ProductsForm, commentPForm, UserForm, UserProfileForm
-from yishi.models import BuyInfo, Products,commentP,star_rating,UserProfile
+from yishi.forms import AdviceForm, BuyInfoForm, ProductsForm, commentPForm, UserForm, UserProfileForm
+from yishi.models import BuyInfo, Products, commentB,commentP,star_rating,UserProfile
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 import json, string
 
 def index(request):
@@ -207,6 +208,58 @@ def buyTogether(request):
     context_dict = {}
     if request.method == 'POST':
         keyword = request.POST.get('KeyWord')
-        BuyInfo_list = BuyInfo.objects.filter(Q(supermarket__icontains=keyword)|Q(position__icontains=keyword)|Q(postcode__icontains=keyword))
-        context_dict['BuyInfos'] = BuyInfo_list
+        try:
+            BuyInfo_list = BuyInfo.objects.filter(Q(supermarket__icontains=keyword)|Q(position__icontains=keyword)|Q(postcode__icontains=keyword))
+            context_dict['BuyInfos'] = BuyInfo_list
+        except BuyInfo.DoesNotExist:
+            context_dict['BuyInfos'] = None
     return render(request, 'yishi/buyTogether.html', context_dict)
+
+@login_required
+def add_BuyInfo(request):
+    BuyInfo_form = BuyInfoForm()
+    if request.method == 'POST':
+        currentUser = request.user
+        users = User.objects.get( username=currentUser )
+        BuyInfo_form = BuyInfoForm(request.POST)
+        if BuyInfo_form.is_valid():
+            buyIn = BuyInfo_form.save(commit=False)
+            buyIn.user = users
+            print(request.user)
+            print(buyIn.user)
+            buyIn.save()
+            messages.success(request, 'Thank you for post you order information !')
+            return redirect('/yishi/buyTogether/')
+        else:
+            print(BuyInfo_form.errors) 
+    else:
+        BuyInfo_form = BuyInfoForm()
+    return render(request, 'yishi/add_BuyInfo.html', context = {'BuyInfo_form': BuyInfo_form})
+
+@login_required
+def detailBI(request, id):
+    context_dict = {}
+    n = 0
+    currentUser = request.user
+    user = User.objects.get(username=currentUser)
+    tag = False
+    try:
+        buyInf = BuyInfo.objects.get(id=id)
+        commentB_List = commentB.objects.filter(Bid = buyInf)
+        context_dict['BuyInfo'] = buyInf
+        context_dict['comments'] = commentB_List
+        for comm in commentB_List:
+            n = n + 1
+            if user == comm.user:
+                tag = True
+        if user == buyInf.user:
+            tag = True
+    except commentB.DoesNotExist:
+        context_dict['comments'] = None
+    except BuyInfo.DoesNotExist:
+        context_dict['BuyInfo'] = None
+    context_dict['tag'] = tag
+    context_dict['n'] = n
+    return render(request, 'yishi/detailBI.html', context = context_dict)
+
+def post_commentB(request, id):

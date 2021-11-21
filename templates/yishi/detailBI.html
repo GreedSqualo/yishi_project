@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends 'yishi/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Detail of Order Information
+{% endblock %}
+
+{% block body_block %}
+    <!-- detail of product -->
+    <div class="container">
+        <div class="row">
+            <!-- Pname and other information -->
+            <div>
+                Supermarket: {{ BuyInfo.supermarket }} <br/>
+                Position：{{ BuyInfo.position }} <br/> 
+                Time：{{ BuyInfo.time }} <br/>
+                Postcode: {{ BuyInfo.postcode }} <br/>
+            </div>
+            <br/>
+            <div>
+            {% if tag %}
+                <div>description: {{ BuyInfo.describtion }}</div>
+            {% else %}
+                Post a comment to get more information....
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+<!--
+    <hr>
+    <div class="container">
+        <form action="#" method="POST" >
+            {% csrf_token %}
+            star_rating:<input type="number" min="0" max="5" name="star_rating" id="star_rating">
+            <p> Conmment: </p>
+            <textarea type="text" id="content" name="content" rows="2"></textarea>
+            <button type="submit" name="addCommentP">Submit</button>
+        </form>
+    </div>
+-->
+
+    <h4 > {{ n }} comments in total: </h4>
+    {% if comments %}
+    <div >
+        {% for comment in comments %}
+            <hr>
+            <p>
+                {{ comment.user.username }} at {{ comment.date|date:"Y-m-d H:i:s" }} ：
+            </p>
+            <pre > {{ comment.content }} </pre>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p> No comment ...</p>
+    {% endif %}
+
+{% endblock %}

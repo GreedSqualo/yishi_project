@@ -16,4 +16,7 @@ urlpatterns = [
     path('advice/', views.advice, name='advice'),
     path('profile/', views.profile, name='profile'),
     path('buyTogether/', views.buyTogether, name='buyTogether'),
+    path('add_BuyInfo/', views.add_BuyInfo, name="add_BuyInfo" ),
+    path('detailBI/<int:id>/', views.detailBI, name="detailBI"),
+    path('post_commentB/<int:id>', views.post_commentB, name='post_commentB'),
 ]
