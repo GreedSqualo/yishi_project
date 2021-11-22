@@ -33,17 +33,17 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('dob', 'picture', 'gender', 'nationality')
+        fields = ('dob', 'picture', 'gender', 'nationality',)
 
 class AdviceForm(forms.ModelForm):
     class Meta:
         model = Advice
-        fields = ('title', 'content', 'state')
+        fields = ('title', 'content', 'state',)
 
 class BuyInfoForm(forms.ModelForm):
     class Meta:
         model = BuyInfo
-        fields = ('supermarket', 'position', 'postcode', 'time', 'describsion')
+        fields = ('supermarket', 'position', 'postcode', 'time', 'describsion',)
 
 class commentBForm(forms.ModelForm):
     class Meta:

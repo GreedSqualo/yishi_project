@@ -77,7 +77,7 @@ class BuyInfo(models.Model):
     describsion = models.TextField(max_length=512, blank=False)
 
     def get_absolute_url(self):
-        return reverse('yishi:detail')
+        return reverse('yishi:detailBI', args=[self.id])
 
 class commentB(models.Model):
     Bid = models.ForeignKey('BuyInfo', on_delete=models.CASCADE)

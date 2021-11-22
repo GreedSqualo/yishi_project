@@ -16,30 +16,32 @@
                 Position：{{ BuyInfo.position }} <br/> 
                 Time：{{ BuyInfo.time }} <br/>
                 Postcode: {{ BuyInfo.postcode }} <br/>
+                {% if tag %}
+                    description: {{ BuyInfo.describsion }}
+                {% else %}
+                    Post a comment to get more information....
+                {% endif %}
             </div>
             <br/>
             <div>
-            {% if tag %}
+            <!--
                 <div>description: {{ BuyInfo.describtion }}</div>
-            {% else %}
-                Post a comment to get more information....
-            {% endif %}
+            
+                
+            -->
             </div>
         </div>
     </div>
 
-<!--
     <hr>
     <div class="container">
-        <form action="#" method="POST" >
+        <form action="{% url 'yishi:post_commentB' BuyInfo.id %}" method="POST" >
             {% csrf_token %}
-            star_rating:<input type="number" min="0" max="5" name="star_rating" id="star_rating">
             <p> Conmment: </p>
             <textarea type="text" id="content" name="content" rows="2"></textarea>
             <button type="submit" name="addCommentP">Submit</button>
         </form>
     </div>
--->
 
     <h4 > {{ n }} comments in total: </h4>
     {% if comments %}

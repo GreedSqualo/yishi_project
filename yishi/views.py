@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.urls import reverse
 from django.http import HttpResponse
-from yishi.forms import AdviceForm, BuyInfoForm, ProductsForm, commentPForm, UserForm, UserProfileForm
+from yishi.forms import AdviceForm, BuyInfoForm, ProductsForm, commentBForm, commentPForm, UserForm, UserProfileForm
 from yishi.models import BuyInfo, Products, commentB,commentP,star_rating,UserProfile
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 import json, string
@@ -225,8 +225,6 @@ def add_BuyInfo(request):
         if BuyInfo_form.is_valid():
             buyIn = BuyInfo_form.save(commit=False)
             buyIn.user = users
-            print(request.user)
-            print(buyIn.user)
             buyIn.save()
             messages.success(request, 'Thank you for post you order information !')
             return redirect('/yishi/buyTogether/')
@@ -248,6 +246,7 @@ def detailBI(request, id):
         commentB_List = commentB.objects.filter(Bid = buyInf)
         context_dict['BuyInfo'] = buyInf
         context_dict['comments'] = commentB_List
+        #print(buyInf.describsion)
         for comm in commentB_List:
             n = n + 1
             if user == comm.user:
@@ -262,4 +261,26 @@ def detailBI(request, id):
     context_dict['n'] = n
     return render(request, 'yishi/detailBI.html', context = context_dict)
 
+@login_required
 def post_commentB(request, id):
+
+    context_dict = {}
+    currentUser = request.user
+    user = User.objects.get(username=currentUser)
+    try:
+        buyInf = BuyInfo.objects.get(id=id)
+        context_dict['BuyInfo'] = buyInf
+    except BuyInfo.DoesNotExist:
+        context_dict['BuyInfo'] = None
+    if request.method == 'POST':
+        comment_form = commentBForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.user = user
+            new_comment.Bid = buyInf
+            new_comment.save()
+            return redirect(buyInf)
+        else :
+            return HttpResponse('Form error')
+    else :
+        return HttpResponse('POST only')
