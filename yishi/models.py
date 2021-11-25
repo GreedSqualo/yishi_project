@@ -20,6 +20,8 @@ class Products(models.Model):
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.Pname)
+        if self.price < 0:
+            self.price = 0.1
         super(Products, self).save(*args, **kwargs)
 
     class Meta:
