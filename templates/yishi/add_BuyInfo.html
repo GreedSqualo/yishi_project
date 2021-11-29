@@ -19,20 +19,20 @@
     <div style="text-align: center;">
         <form id="product_form" method="post" action="/yishi/add_BuyInfo/" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="id_supermarket">Supermarket:</label>
-            <input type="text" name="supermarket" maxlength="128" id="id_supermarket"><br/>
+            <label class="inputWordBigger" for="id_supermarket">Supermarket:</label>
+            <input class="inputWord addP" type="text" name="supermarket" maxlength="128" id="id_supermarket"><br/>
 
-            <label for="id_position">Position:</label>
-            <input type="text" name="position" maxlength="128" id="id_position"><br/>
+            <label class="inputWordBigger" for="id_position">Position:</label>
+            <input class="inputWord addP" type="text" name="position" maxlength="128" id="id_position"><br/>
 
-            <label for="id_postcode">Postcode:</label>
-            <input type="text" name="postcode" maxlength="128" id="id_postcode"><br/>
+            <label class="inputWordBigger" for="id_postcode">Postcode:</label>
+            <input class="inputWord addP" type="text" name="postcode" maxlength="128" id="id_postcode"><br/>
 
-            <label for="id_time">Time:</label>
-            <input type="date" name="time" id="id_time"><br/>
+            <label class="inputWordBigger" for="id_time">Time:</label>
+            <input class="inputWord addP" type="date" name="time" id="id_time"><br/>
 
-            <label for="id_describsion">Describsion:</label>
-            <textarea name="describsion" cols="40" rows="10" maxlength="512" required id="id_describsion"></textarea><br/>
+            <label class="inputWordBigger" for="id_describsion">Describsion:</label>
+            <textarea class="inputWord addP" name="describsion" cols="40" rows="10" maxlength="512" required id="id_describsion"></textarea><br/>
 
             <button class="inputWord allTheB" type="submit" name="submit" value="Add">Submit</button>
 
