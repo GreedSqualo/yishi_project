@@ -15,15 +15,20 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Login to Yishi</h1>
+    <h1 class="logo">Login to Yishi</h1>
+
+    <div style="text-align: center;">
     <form id="login_form" method="POST" action="{% url 'yishi:login' %}">
         {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50" />
+        <p><label class="inputWordBigger">Username: </label></p>
+        <input class="inputWord addP" type="text" name="username" value="" size="50" />
         <br/>
-        Password: <input type="password" name="password" value="" size="128" />
+        <p><label class="inputWordBigger">Password: </label></p>
+        <input class="inputWord addP" type="password" name="password" value="" size="128" />
         <br/>
-        <button type="submit" value="submit">Login</button>
+        <button class="allTheB" type="submit" value="submit">Login</button>
     </form>
-    <label> Don't have account? </label>
+    <label class="inputWordSmall"> Don't have account? </label>
     <a href="{% url 'yishi:register' %}">Join Us!</a>
+    </div>
 {% endblock %} 

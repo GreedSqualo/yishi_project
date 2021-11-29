@@ -12,7 +12,7 @@
         <div class="row">
             <!-- Pname and other information -->
             <img src="{{ MEDIA_URL }}{{ product.Photo }}" style="width:200px; hight:200px;">
-            <h1 class="col-12 mt-4 mb-4">{{ product.Pname }}</h1> 
+            <h1 class="col-12 mt-4 mb-4" class="inputWordBigger">{{ product.Pname }}</h1> 
             <div>
                 rate: {{ rate }} <br/>
                 brand：{{ product.brand }} <br/> 
@@ -231,9 +231,9 @@
             </p>
             <p> {{ comment.star_rating }} </p>
             <pre > {{ comment.content }} </pre>
+        {% empty %}
+            <p> No comment ...</p>
         {% endfor %}
-    </div>
-    {% else %}
-        <p> No comment ...</p>
+    </div>        
     {% endif %}
 {% endblock %}

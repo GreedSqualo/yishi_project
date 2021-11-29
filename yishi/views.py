@@ -77,6 +77,7 @@ def add_product(request):
 
 def post_commentP(request, Pname_slug):
     product = get_object_or_404(Products, slug=Pname_slug)
+    print(product)
     if request.method == 'POST':
         comment_form = commentPForm(request.POST)
         if comment_form.is_valid():
@@ -92,8 +93,8 @@ def post_commentP(request, Pname_slug):
                 star_ratingP.star_rating = (star_ratingP.star_rating * star_ratingP.n + rate)/(star_ratingP.n + 1)
                 star_ratingP.n = star_ratingP.n + 1
                 star_ratingP.save()
-                print(star_ratingP.star_rating)
-                print(star_ratingP.n)
+                #print(star_ratingP.star_rating)
+                #print(star_ratingP.n)
             except star_rating.DoesNotExist :
                 star_rating.objects.create(Pname=product, country=countryC, star_rating=rate, n=1)
             return redirect(product)

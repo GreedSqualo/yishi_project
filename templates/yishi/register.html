@@ -23,31 +23,31 @@
         <div style="text-align: center;">
         <form id="user_form" method="POST" action="{% url 'yishi:register' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <p><label for="id_username">Username:</label> 
-            <input type="text" name="username" maxlength="150" required id="id_username"><br/> 
-            <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
+            <p><label class="inputWordBigger" for="id_username">Username:</label> 
+            <input class="inputWord addP" type="text" name="username" maxlength="150" required id="id_username"><br/> 
+            <span class="helptext inputWordSmall">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
             
-            <p><label for="id_email">Email address:</label> 
-            <input type="email" name="email" maxlength="254" id="id_email"></p>
+            <p><label class="inputWordBigger" for="id_email">Email address:</label> 
+            <input class="inputWord addP" type="email" name="email" maxlength="254" id="id_email"></p>
 
-            <p><label for="id_password">Password:</label> 
-            <input type="password" name="password" required id="id_password"></p>
+            <p><label class="inputWordBigger" for="id_password">Password:</label> 
+            <input class="inputWord addP" type="password" name="password" required id="id_password"></p>
 
-            <p><label for="id_dob">Dob:</label> 
-            <input type="date" name="dob" id="id_dob"></p>
+            <p><label class="inputWordBigger" for="id_dob">Dob:</label> 
+            <input class="inputWord addP" type="date" name="dob" id="id_dob"></p>
 
-            <p><label for="id_picture">Picture:</label> 
-            <input type="file" name="picture" accept="image/*" id="id_picture"></p>
+            <p><label class="inputWordBigger" for="id_picture">Picture:</label> 
+            <input class="inputWord addP" type="file" name="picture" accept="image/*" id="id_picture"></p>
             
-            <p><label for="id_gender">Gender:</label> 
-            <select name="gender" id="id_gender">
+            <p><label class="inputWordBigger" for="id_gender">Gender:</label> 
+            <select class="indexSelect inputWord" name="gender" id="id_gender">
                 <option value="FEMALE">Female</option>
                 <option value="MALE">Male</option>
                 <option value="OTHER">Other</option>
                 <option value="SECRETE" selected>Secrete</option>
             </select></p>
 
-            <p><label for="id_nationality">Nationality:</label> 
+            <p><label class="inputWordBigger" for="id_nationality">Nationality:</label> 
             <select class="indexSelect inputWord" name="nationality" maxlength="128" required name="Country" id="id_nationality">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
@@ -225,18 +225,18 @@
             </select>
             </p>
 
-            <input class="inputWord allTheB" type="submit" name="submit" value="Register" />
+            <button class="inputWord allTheB" type="submit" name="submit" />Register</button>
         </form>
         </div>
 
         <div>
-        <label>By creating an account you agree to Yishi's</label>
+        <label class="inputWordSmall">By creating an account you agree to Yishi's</label>
         <a href="#">Condition of Use.</a>
-        <label>Please see our </label>
+        <label class="inputWordSmall">Please see our </label>
         <a href="#">Privacy Agreement</a>, and
         <a href="#">Cookies Notice</a>.
         <br/>
-        <label> Already have account? </label>
+        <label class="inputWordSmall"> Already have account? </label>
         <a href="{% url 'yishi:login' %}">Login !</a>
         </div>
     {% endif %}
