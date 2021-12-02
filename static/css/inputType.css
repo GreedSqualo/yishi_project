@@ -8,6 +8,15 @@ select.indexSelect {
     height: 8ex;
 }
 
+select.detailSelect {
+    margin-top: 5%;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 3px;
+    border-color:  #4CAF50;
+    height: 1ex;
+}
+
 /* input  */
 input.indexSelect {
     margin-top: 5%;

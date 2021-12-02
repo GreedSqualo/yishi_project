@@ -12,21 +12,21 @@
         <div class="row">
             <!-- Pname and other information -->
             <img src="{{ MEDIA_URL }}{{ product.Photo }}" style="width:200px; hight:200px;">
-            <h1 class="col-12 mt-4 mb-4" class="inputWordBigger">{{ product.Pname }}</h1> 
+            <h1 class="title col-12 mt-4 mb-4" class="inputWordBigger">{{ product.Pname }}</h1> 
             <div>
-                rate: {{ rate }} <br/>
-                brand：{{ product.brand }} <br/> 
-                price：{{ product.price }}￡</div> 
-            <div>description：{{ product.description }}</div>
+                <p class="detail" >rate: {{ rate }} </p><br/>
+                <p class="detail" >brand：{{ product.brand }} </p><br/> 
+                <p class="detail" >price：{{ product.price }}￡</p></div> 
+            <div class="detail" >description：{{ product.description }}</div>
         </div>
     </div>
 
     <hr>
     <div class="container">
-        <form action="{% url 'yishi:post_commentP' product.slug %}" method="POST" >
+        <form action="{% url 'yishi:post_commentP' Pname_slug=product.slug %}" method="POST" >
             {% csrf_token %}
-            <h6> Input your nationality please(This data is for statistical purposes only): </p>
-            <select name="country" id="country">
+            <h6 class="typeface" > Input your nationality please(This data is for statistical purposes only): </p>
+            <select class="detailSelect" name="country" id="country">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
                 <option value="Algeria">Algeria</option>
@@ -201,8 +201,10 @@
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
             </select><br/>
-            star_rating:<input type="number" min="0" max="5" name="star_rating" id="star_rating">
-            <p> Conmment: </p>
+            <label>star_rating: </label>
+            <input class="typeface" type="number" min="0" max="5" name="star_rating" id="star_rating">
+            </br>
+            <label class="typeface"> Conmment: <label>
             <textarea type="text" id="content" name="content" rows="2"></textarea>
             <button type="submit" name="addCommentP">Submit</button>
         </form>
@@ -221,6 +223,7 @@
         </script>
     </div>
 
+
     <h4 >{{ n }} comments in total: </h4>
     {% if comments %}
     <div >
@@ -232,7 +235,9 @@
             <p> {{ comment.star_rating }} </p>
             <pre > {{ comment.content }} </pre>
         {% empty %}
-            <p> No comment ...</p>
+            <p> No comment ... 
+                Why not post your comment (^ w ^)
+            </p>
         {% endfor %}
     </div>        
     {% endif %}

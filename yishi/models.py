@@ -88,4 +88,4 @@ class commentB(models.Model):
     content = models.TextField(max_length=512)
 
     class Meta:
-        verbose_name_plural = 'commentPs'
+        verbose_name_plural = 'commentBs'
