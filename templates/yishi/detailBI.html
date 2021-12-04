@@ -9,49 +9,45 @@
 {% block body_block %}
     <!-- detail of product -->
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top: 10% ;">
             <!-- Pname and other information -->
+            <br/><br/><br/>
             <div>
-                Supermarket: {{ BuyInfo.supermarket }} <br/>
-                Position：{{ BuyInfo.position }} <br/> 
-                Time：{{ BuyInfo.time }} <br/>
-                Postcode: {{ BuyInfo.postcode }} <br/>
+                <p class="detail" >Supermarket: {{ BuyInfo.supermarket }} </p> <br/>
+                <p class="detail" >Position：{{ BuyInfo.position }} </p> <br/> 
+                <p class="detail" >Time：{{ BuyInfo.time }} </p> <br/>
+                <p class="detail" >Postcode: {{ BuyInfo.postcode }} </p><br/>
                 {% if tag %}
-                    description: {{ BuyInfo.describsion }}
+                    <p class="detail" > description: {{ BuyInfo.describsion }}</p>
                 {% else %}
-                    Post a comment to get more information....
+                    <p class="detail" > Post a comment to get more information.... </p>
                 {% endif %}
             </div>
             <br/>
-            <div>
-            <!--
-                <div>description: {{ BuyInfo.describtion }}</div>
-            
-                
-            -->
-            </div>
         </div>
     </div>
 
-    <hr>
+    <hr class="green">
     <div class="container">
         <form action="{% url 'yishi:post_commentB' BuyInfo.id %}" method="POST" >
             {% csrf_token %}
-            <p> Conmment: </p>
-            <textarea type="text" id="content" name="content" rows="2"></textarea>
-            <button type="submit" name="addCommentP">Submit</button>
+            <p class="typeface"> Conmment: </p>
+            <textarea class="addP" type="text" id="content" name="content" rows="2"></textarea>
+            <br/>
+            <button class="allTheB" type="submit" name="addCommentP">Submit</button>
         </form>
     </div>
 
-    <h4 > {{ n }} comments in total: </h4>
+    <hr class="green">
+    <h4 class="typeface" style="margin-left: 10%;"> {{ n }} comments in total: </h4>
     {% if comments %}
     <div >
         {% for comment in comments %}
-            <hr>
-            <p>
+            <p class="comment">
                 {{ comment.user.username }} at {{ comment.date|date:"Y-m-d H:i:s" }} ：
             </p>
-            <pre > {{ comment.content }} </pre>
+            <pre class="comment"> {{ comment.content }} </pre>
+            <hr class="green">
         {% endfor %}
     </div>
     {% else %}
