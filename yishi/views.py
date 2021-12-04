@@ -39,14 +39,16 @@ def result(request):
 def detail(request, Pname_slug, countryS):
     context_dict = {}
     punctuation_string = string.punctuation
+    context_dict['country'] = json.dumps(countryS)
     for i in punctuation_string:
         countryS = countryS.replace(i, '')
     try:
         product = Products.objects.get(slug=Pname_slug)
+        #print(product)
         comment_list = commentP.objects.filter(Pname=product.Pname, country=countryS)
         star = star_rating.objects.get(Pname = product.Pname, country=countryS)
-        context_dict['product'] = product
         context_dict['comments'] = comment_list
+        #context_dict['product'] = product
         context_dict['rate'] = star.star_rating
         context_dict['n'] = star.n
     except Products.DoesNotExist :
@@ -55,8 +57,9 @@ def detail(request, Pname_slug, countryS):
         context_dict['comments'] = None
     except star_rating.DoesNotExist:
         context_dict['rate'] = 0.0
-        context_dict['n'] = 0
-    context_dict['country'] = json.dumps(countryS)
+        context_dict['n'] = 0  
+    context_dict['product'] = product
+    #print(product)
     return render(request, 'yishi/detail.html', context=context_dict)
 
 def add_product(request):
@@ -77,6 +80,7 @@ def add_product(request):
 
 def post_commentP(request, Pname_slug):
     product = get_object_or_404(Products, slug=Pname_slug)
+    context_dict = {}
     print(product)
     if request.method == 'POST':
         comment_form = commentPForm(request.POST)
@@ -87,22 +91,39 @@ def post_commentP(request, Pname_slug):
             countryC = request.POST['country']
             rate = request.POST['star_rating']
             rate = float(rate) 
-            try:
-                star_ratingP = star_rating.objects.get(Pname=product, country=countryC)
-                print(star_ratingP.star_rating)
+            star_ratingP = star_rating.objects.get(Pname=product, country=countryC)
+            if star_ratingP is None:
+                star_rating.objects.create(Pname=product, country=countryC, star_rating=rate, n=1)
+            else:
                 star_ratingP.star_rating = (star_ratingP.star_rating * star_ratingP.n + rate)/(star_ratingP.n + 1)
                 star_ratingP.star_rating = round(star_ratingP.star_rating, 2)
                 star_ratingP.n = star_ratingP.n + 1
                 star_ratingP.save()
-                print(star_ratingP.star_rating)
-                print(star_ratingP.n)
-            except star_rating.DoesNotExist :
-                star_rating.objects.create(Pname=product, country=countryC, star_rating=rate, n=1)
-            return redirect(product)
+            # return redirect(product)
+            # try:
+            #     star_ratingP = star_rating.objects.get(Pname=product, country=countryC)
+            #     print(star_ratingP.star_rating)
+            #     star_ratingP.star_rating = (star_ratingP.star_rating * star_ratingP.n + rate)/(star_ratingP.n + 1)
+            #     star_ratingP.star_rating = round(star_ratingP.star_rating, 2)
+            #     star_ratingP.n = star_ratingP.n + 1
+            #     star_ratingP.save()
+            #     print(star_ratingP.star_rating)
+            #     print(star_ratingP.n)
+            # except star_rating.DoesNotExist :
+            #     star_rating.objects.create(Pname=product, country=countryC, star_rating=rate, n=1)
+            # return redirect(product)
         else:
             return HttpResponse('Form error')
     else:
         return HttpResponse('POST only')
+    context_dict['country'] = json.dumps(countryC)
+    context_dict['product'] = product
+    comment_list = commentP.objects.filter(Pname=product.Pname, country=countryC)
+    star_ratingP = star_rating.objects.get(Pname=product, country=countryC)
+    context_dict['comments'] = comment_list
+    context_dict['rate'] = star_ratingP.star_rating
+    context_dict['n'] = star_ratingP.n
+    return render(request, 'yishi/detail.html', context=context_dict)
 
 def register(request):
     registered = False

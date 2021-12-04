@@ -1,0 +1,46 @@
+[33md969bb1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{0}: reset: moving to d969bb1
+[33m12606c3[m HEAD@{1}: reset: moving to 12606c3
+[33md969bb1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{2}: reset: moving to d969bb1
+[33m12606c3[m HEAD@{3}: reset: moving to 12606c3
+[33ma70519b[m HEAD@{4}: reset: moving to a70519b
+[33mfe3f600[m HEAD@{5}: reset: moving to fe3f600
+[33mab65a58[m HEAD@{6}: reset: moving to ab65a58
+[33m98133d8[m HEAD@{7}: reset: moving to 98133d8
+[33m60b7dd5[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{8}: commit: modify detail page but have NoReverseMatch
+[33m8d0d432[m HEAD@{9}: commit: modify something
+[33m795e258[m HEAD@{10}: commit: modify something
+[33m3cd4137[m HEAD@{11}: commit: add test
+[33m98133d8[m HEAD@{12}: commit: all main function fixed
+[33mab65a58[m HEAD@{13}: commit: order information detail page
+[33mfe3f600[m HEAD@{14}: commit: add picture in the result page
+[33m13a318e[m HEAD@{15}: commit: add buy together model and commentB model
+[33md969bb1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{16}: commit: modify the commentP, detail page
+[33m12606c3[m HEAD@{17}: commit: modify the profile page
+[33ma70519b[m HEAD@{18}: commit: add buyTogether page
+[33m4ce7ab1[m HEAD@{19}: commit: more user information
+[33mf336b41[m HEAD@{20}: commit: more user information
+[33md88b10f[m HEAD@{21}: commit: something not so important
+[33m54b3f44[m HEAD@{22}: commit: advice page
+[33mdcf7ce6[m HEAD@{23}: commit: add login page
+[33m69f0a96[m HEAD@{24}: commit: modify the layout of register page
+[33mc59358c[m HEAD@{25}: commit: modify the layout of result page
+[33mbbf5e2d[m HEAD@{26}: commit: modify the layout index and result
+[33m0b8aaa4[m HEAD@{27}: commit: modify the layout of footer, header and base
+[33m39afe46[m HEAD@{28}: commit: change adding product page
+[33m10eaf17[m HEAD@{29}: commit: add register
+[33mf244583[m HEAD@{30}: commit: add something not so important
+[33m5b27060[m HEAD@{31}: commit: add commentP and star_rating 1.0
+[33mda2e101[m HEAD@{32}: commit: add commentP and star_rating
+[33mfeb134c[m HEAD@{33}: commit: add detail page
+[33m65f5cb0[m HEAD@{34}: commit: modify the layout of the page
+[33m1222f57[m HEAD@{35}: commit: add search and other
+[33mb428244[m HEAD@{36}: commit: can add a new product now without alter
+[33m352d5d5[m HEAD@{37}: commit: change database and add result and detail page
+[33mb3b05f1[m HEAD@{38}: commit: create datadase models products and comment
+[33m001a90e[m HEAD@{39}: commit: function of header and footer
+[33m1753928[m HEAD@{40}: commit: add footer and header
+[33mb63fdc5[m HEAD@{41}: commit: add an about page
+[33mb348bee[m HEAD@{42}: commit: add a new urls.py and about page
+[33mf1ef083[m HEAD@{43}: checkout: moving from main to master
+[33m9dbebe6[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{44}: checkout: moving from master to main
+[33mf1ef083[m HEAD@{45}: commit (initial): first commit

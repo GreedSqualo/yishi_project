@@ -225,7 +225,7 @@
 
 
     <h4 >{{ n }} comments in total: </h4>
-    {% if comments %}
+    {% if n %}
     <div >
         {% for comment in comments %}
             <hr>
@@ -233,12 +233,12 @@
                 at {{ comment.date|date:"Y-m-d H:i:s" }} ：
             </p>
             <p> {{ comment.star_rating }} </p>
-            <pre > {{ comment.content }} </pre>
-        {% empty %}
-            <p> No comment ... 
-                Why not post your comment (^ w ^)
-            </p>
+            <pre > {{ comment.content }} </pre>    
         {% endfor %}
-    </div>        
+    </div> 
+    {% else %}   
+        <p> No comment ... </br>
+            Why not post your comment (^ w ^)
+        </p>
     {% endif %}
 {% endblock %}
