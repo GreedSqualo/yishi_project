@@ -21,12 +21,12 @@
         </div>
     </div>
 
-    <hr>
+    <hr class="green">
     <div class="container">
         <form action="{% url 'yishi:post_commentP' Pname_slug=product.slug %}" method="POST" >
             {% csrf_token %}
-            <h6 class="typeface" > Input your nationality please(This data is for statistical purposes only): </p>
-            <select class="detailSelect" name="country" id="country">
+            <h6 class="detail" > Input your nationality please(This data is for statistical purposes only): </p>
+            <select class="indexSelect" name="country" id="country">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
                 <option value="Algeria">Algeria</option>
@@ -201,12 +201,13 @@
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
             </select><br/>
-            <label>star_rating: </label>
-            <input class="typeface" type="number" min="0" max="5" name="star_rating" id="star_rating">
+            <label class="typeface" >rating: </label>
+            <input class="addP" type="number" min="0" max="5" name="star_rating" id="star_rating">
             </br>
-            <label class="typeface"> Conmment: <label>
-            <textarea type="text" id="content" name="content" rows="2"></textarea>
-            <button type="submit" name="addCommentP">Submit</button>
+            <label class="typeface"> Conmment: </label>
+            <textarea type="addP" id="content" name="content" rows="2"></textarea>
+            <br />
+            <button class="allTheB" type="submit" name="addCommentP">Submit</button><br />
         </form>
         <script type="text/javascript">
             var country1 = {{ country|safe }};
@@ -223,17 +224,17 @@
         </script>
     </div>
 
-
-    <h4 >{{ n }} comments in total: </h4>
+    <hr class="green">
+    <h4 class="typeface" style="margin-left: 10%;">{{ n }} comments in total: </h4>
     {% if n %}
     <div >
         {% for comment in comments %}
-            <hr>
-            <p>
+            <p class="comment">
                 at {{ comment.date|date:"Y-m-d H:i:s" }} ：
             </p>
-            <p> {{ comment.star_rating }} </p>
-            <pre > {{ comment.content }} </pre>    
+            <p class="comment"> {{ comment.star_rating }} </p>
+            <pre class="comment" > {{ comment.content }} </pre>    
+            <hr class="green">
         {% endfor %}
     </div> 
     {% else %}   
