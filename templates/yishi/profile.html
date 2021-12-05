@@ -19,13 +19,14 @@
     <div class="container">
         <div class="row">
             <!-- Pname and other information -->
-            <img src="{{ MEDIA_URL }}{{ userProfile.picture }}" style="width:200px; hight:200px;">
-            <div>
-                name: {{ user.username }} <br/>
-                email: {{ user.email }} <br/>
-                date of birth：{{ userProfile.dob }} <br/>
-                gender：{{ userProfile.gender }} <br/>
-                nationality：{{ userProfile.nationality }}
+            <img class="indexLogo" src="{{ MEDIA_URL }}{{ userProfile.picture }}" style="width:200px; hight:200px;">
+            <br/>
+            <div style="margin-left:2%;">
+                <p class="detail" >name: {{ user.username }} </p> <br/>
+                <p class="detail" >email: {{ user.email }} </p> <br/>
+                <p class="detail" >date of birth：{{ userProfile.dob }} </p> <br/>
+                <p class="detail" >gender：{{ userProfile.gender }} </p> <br/>
+                <p class="detail" >nationality：{{ userProfile.nationality }} </p>
             </div>    
         </div>
         <hr class="green">
@@ -33,33 +34,33 @@
         <div style="text-align: center;">
         <form id="user_form" method="POST" action="{% url 'yishi:profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <p><label for="id_email">Edit your profile:</label><br/>
+            <p><label class="inputWordBigger" for="id_email">Edit your profile:</label><br/>
 
-            <p><label for="id_username">Username:</label> 
-            <input type="text" name="username" maxlength="150" required id="id_username" value="{{ user.username }}"><br/> 
-            <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
+            <p><label class="inputWordBigger" for="id_username">Username:</label> 
+            <input class="inputWord addP" type="text" name="username" maxlength="150" required id="id_username" value="{{ user.username }}"><br/> 
+            <span class="helptext inputWordSmall" class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
 
-            <p><label for="id_email">Email address:</label> 
-            <input type="email" name="email" maxlength="254" id="id_email" value="{{ user.email }}"></p>
+            <p><label class="inputWordBigger" for="id_email">Email address:</label> 
+            <input class="inputWord addP" type="email" name="email" maxlength="254" id="id_email" value="{{ user.email }}"></p>
 
-            <p><label for="id_dob" value=" {{ userProfile.dob }} ">Dob:</label>
-            <input type="date" name="dob" id="id_dob" ></p>
+            <p><label class="inputWordBigger" for="id_dob" value=" {{ userProfile.dob }} ">Dob:</label>
+            <input class="inputWord addP" type="date" name="dob" id="id_dob" ></p>
 
-            <p><label for="id_password">Password:</label> 
-            <input type="password" name="password" required id="id_password" {{ user.password }}></p>
+            <p><label class="inputWordBigger" for="id_password">Password:</label> 
+            <input class="inputWord addP" type="password" name="password" required id="id_password" {{ user.password }}></p>
 
-            <p><label for="id_picture">Picture:</label> 
-            <input type="file" name="picture" accept="image/*" id="id_picture"></p>
+            <p><label class="inputWordBigger" for="id_picture">Picture:</label> 
+            <input class="inputWord addP" type="file" name="picture" accept="image/*" id="id_picture"></p>
             
-            <p><label for="id_gender">Gender:</label> 
-            <select name="gender" id="id_gender">
+            <p><label class="inputWordBigger" for="id_gender">Gender:</label> 
+            <select class="indexSelect inputWord" name="gender" id="id_gender">
                 <option value="FEMALE">Female</option>
                 <option value="MALE">Male</option>
                 <option value="OTHER">Other</option>
                 <option value="SECRETE" selected>Secrete</option>
             </select></p>
 
-            <p><label for="id_nationality">Nationality:</label> 
+            <p><label class="inputWord addP" for="id_nationality">Nationality:</label> 
             <select class="indexSelect inputWord" name="nationality" maxlength="128" required id="id_nationality">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
@@ -236,6 +237,6 @@
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
             <br/>
-        <input class="inputWord allTheB" type="submit" name="submit" value="edit" />
+        <button class="inputWord allTheB" style="margin-top:2%;" type="submit" name="submit" value="edit" />Edit</button>
     </div>
 {% endblock %}

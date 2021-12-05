@@ -17,11 +17,12 @@
 
 {% block body_block %}
     <h1 class="logo">Thank you for using Yishi !</h1>
+        <p> Hi, I'm Chuyan. I am very honoured that you would like to use this site. </P>
         <div>
             Any advice: <br/>
             <a href="{% url 'yishi:advice' %}">Advice</a>
         </div>
         <div>
-            <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of Cat" />
+            {% comment %} <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of Cat" /> {% endcomment %}
         </div>
 {% endblock %}
