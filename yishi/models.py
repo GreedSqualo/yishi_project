@@ -21,7 +21,7 @@ class Products(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.Pname)
         if self.price < 0:
-            self.price = 0.1
+            self.price = 0.01
         super(Products, self).save(*args, **kwargs)
 
     class Meta:
@@ -33,12 +33,24 @@ class star_rating(models.Model):
     country = models.CharField(max_length=128)
     n = models.IntegerField(default=0)
 
+    def save(self, *args, **kwargs):
+        if self.n < 0 :
+            self.n = 1
+        if self.star_rating < 0 :
+            self.star_rating = 0.01
+        super(star_rating, self).save(*args, **kwargs)
+
 class commentP(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     star_rating = models.FloatField(max_length=128)
     content = models.TextField(max_length=512)
     country = models.CharField(max_length=128)
     Pname = models.ForeignKey(Products, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        if self.star_rating < 0 :
+            self.star_rating = 0.01
+        super(commentP, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'commentPs'
