@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify, title
@@ -67,6 +68,11 @@ class UserProfile(models.Model):
     dob = models.DateField(blank=True)
     gender = models.CharField(max_length=128, choices=GENDER_OF_USER, default='SECRETE')
     nationality = models.CharField(max_length=128)
+
+    def save(self, *args, **kwargs):
+        if self.dob > timezone.now() :
+            self.dob = timezone.now()
+        super(UserProfile, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.user.username

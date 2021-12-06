@@ -1,7 +1,12 @@
+import datetime
+import unittest
+from django.contrib.auth.models import User
+from django.shortcuts import render
 from django.http import response
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls.base import reverse
-from yishi.models import Products, commentP, star_rating
+from django.utils import timezone
+from yishi.models import Advice, Products, UserProfile, commentP, star_rating
 
 # Create your tests here.
 
@@ -61,3 +66,73 @@ class commentPMethodTest(TestCase):
         product = add_product('test', 1, 'Morrisons', 'Just a test')
         comment = add_commentP(-1, 'Just a test', 'China', product)
         self.assertEqual((comment.star_rating > 0), True)
+
+class userProfileMethodTest(unittest.TestCase):
+    def test_ensure_dob_is_less_than_now(self):
+        user = User(username='aaa', password='123456')
+        user.save()
+        profile = UserProfile(user=user, dob=timezone.now() + datetime.timedelta(days=30), nationality='China')
+        profile.save()
+        self.assertEqual((profile.dob <= timezone.now()), True)
+
+class indexMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    """
+        Check index page
+    """
+    def test_index(self):
+        response = self.client.get(reverse('yishi:index'))
+        self.assertEqual(response.status_code, 200)
+
+class aboutMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    """
+        Check about page
+    """
+    def test_about(self):
+        response = self.client.get(reverse('yishi:about'))
+        self.assertEqual(response.status_code, 200)
+
+class resultMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_result(self):
+        aa = add_product('aa', 1.2, 'abrand', 'just a test')
+        bb = add_product('bb', 1.3, 'bbrand', 'just a test 2')
+        add_star_rating(1.2, aa, 'China', 1)
+        add_star_rating(1.3, bb, 'UK', 1)
+        response = self.client.post(reverse('yishi:result'), {'ProductName':'aa', 'Country':'China'})
+        self.assertEqual(response.status_code, 200)
+
+class adviceMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_advice(self):
+        data = {
+            'title' : 'title test',
+            'content' : 'test test just a test',
+            'state' : 'ACTIVE',
+        }
+        response = self.client.post(reverse('yishi:advice'), data)
+        self.assertEqual(response.status_code, 200)
+
+# class detailMethodTest(unittest.TestCase):
+#     def setUp(self):
+#         self.client = Client()
+    
+#     def test_detail(self):
+#         aa = add_product('aa', 1.2, 'abrand', 'just a test')
+#         response = self.client.get(reverse('yishi:detail'), {'Pname_slug':aa.slug, 'countryS':'China'})
+#         self.assertEqual(response.status_code, 200)
+
+# class postCommentPMethodTest(unittest.TestCase):
+#     def setUp(self):
+#         self.client = Client()
+
+#     def test_
