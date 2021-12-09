@@ -122,6 +122,51 @@ class adviceMethodTest(unittest.TestCase):
         response = self.client.post(reverse('yishi:advice'), data)
         self.assertEqual(response.status_code, 200)
 
+class registerMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_register(self):
+        data = {
+            'username' : 'aaa',
+            'email' : 'email@ll.com',
+            'password' : '123456',
+            'dob' : timezone.now(),
+            'gender' : 'SECRETE',
+            'nationality' : 'UK',
+        }
+        response = self.client.post(reverse('yishi:register'), data)
+        self.assertEqual(response.status_code, 200)
+
+class addProductMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_add_product(self):
+        data = {
+            'Pname' : 'test 1',
+            'price' : '1.3',
+            'brand' : 'just test',
+            'description' : 'just a test',
+        }
+        response = self.client.post(reverse('yishi:add_product'), data)
+        self.assertEqual(response.status_code, 302)
+
+class loginMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+    
+    def test_login(self):
+        data = {
+            'username' : '1123',
+            'password' : '123456',
+        }
+        user = User(username='1123', email='email@ll.com', password='123456')
+        user.set_password('123456')
+        user.save()
+        response = self.client.post(reverse('yishi:login'), data)
+        self.assertEqual(response.status_code, 302)
+
 # class detailMethodTest(unittest.TestCase):
 #     def setUp(self):
 #         self.client = Client()
