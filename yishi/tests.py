@@ -6,7 +6,7 @@ from django.http import response
 from django.test import TestCase, Client
 from django.urls.base import reverse
 from django.utils import timezone
-from yishi.models import Advice, Products, UserProfile, commentP, star_rating
+from yishi.models import Advice, BuyInfo, Products, UserProfile, commentP, star_rating
 
 # Create your tests here.
 
@@ -167,13 +167,56 @@ class loginMethodTest(unittest.TestCase):
         response = self.client.post(reverse('yishi:login'), data)
         self.assertEqual(response.status_code, 302)
 
+class profileMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.username = '1111'
+        self.password = '123456'
+        self.user = User.objects.create_user(username=self.username, password=self.password)
+        self.client = Client()
+        self.client.login(username=self.username, password=self.password)
+
+    def test_profile(self):
+        response = self.client.post(reverse('yishi:profile'))
+        self.assertEqual(response.status_code, 200)    
+
+    def tearDown(self) -> None:
+        self.client.logout()
+        self.user.delete()
+        return super().tearDown()
+
+class BuyTogetherMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.username = '1111'
+        self.password = '123456'
+        self.user = User.objects.create_user(username=self.username, password=self.password)
+        self.client = Client()
+        self.client.login(username=self.username, password=self.password)
+        # user = User(username='11111', email='email@ll.com', password='123456')
+        # user.set_password('123456')
+        # user.save()
+        # self.client.login(username='11111',password='123456')
+
+    def test_BuyTo(self):
+        user = User(username='112', email='email@ll.com', password='123456')
+        user.set_password('123456')
+        user.save()
+        aa = BuyInfo(user=user, supermarket='aa', position='1.2', describsion='abrand',)
+        bb = BuyInfo(user=user,supermarket='bb', position='1.3', describsion='bbrand',)
+        response = self.client.post(reverse('yishi:buyTogether'), {'KeyWord':'aa'})
+        self.assertEqual(response.status_code, 200)   
+
+    def tearDown(self) -> None:
+        self.client.logout()
+        self.user.delete()
+        return super().tearDown()
+
 # class detailMethodTest(unittest.TestCase):
 #     def setUp(self):
 #         self.client = Client()
     
 #     def test_detail(self):
 #         aa = add_product('aa', 1.2, 'abrand', 'just a test')
-#         response = self.client.get(reverse('yishi:detail'), {'Pname_slug':aa.slug, 'countryS':'China'})
+#         response = self.client.get(reverse('yishi:detail'))
 #         self.assertEqual(response.status_code, 200)
 
 # class postCommentPMethodTest(unittest.TestCase):
