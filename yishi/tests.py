@@ -25,6 +25,11 @@ def add_commentP(star_rating1, content, country, Pname):
     comment.save()
     return comment
 
+def add_BuyInfo(user, supermarket, position, describsion):
+    bu = BuyInfo(user=user, supermarket=supermarket, time=timezone.now(), position=position, describsion=describsion)
+    bu.save()
+    return bu
+
 class ProductMethodTests(TestCase):
     """
         Check wether the price of the product is bigger than 0
@@ -197,13 +202,52 @@ class BuyTogetherMethodTest(unittest.TestCase):
         # self.client.login(username='11111',password='123456')
 
     def test_BuyTo(self):
-        user = User(username='112', email='email@ll.com', password='123456')
-        user.set_password('123456')
-        user.save()
-        aa = BuyInfo(user=user, supermarket='aa', position='1.2', describsion='abrand',)
-        bb = BuyInfo(user=user,supermarket='bb', position='1.3', describsion='bbrand',)
+        aa = BuyInfo(user=self.user, supermarket='aa', position='1.2', describsion='abrand',)
+        bb = BuyInfo(user=self.user,supermarket='bb', position='1.3', describsion='bbrand',)
         response = self.client.post(reverse('yishi:buyTogether'), {'KeyWord':'aa'})
         self.assertEqual(response.status_code, 200)   
+
+    def tearDown(self) -> None:
+        self.client.logout()
+        self.user.delete()
+        return super().tearDown()
+
+class AddBuyTogetherMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.username = '1111'
+        self.password = '123456'
+        self.user = User.objects.create_user(username=self.username, password=self.password)
+        self.client = Client()
+        self.client.login(username=self.username, password=self.password)
+
+    def test_Add_BuyInfo(self):
+        data = {
+            'user' : self.user,
+            'supermarket' : 'Tesco',
+            'time': timezone.now(),
+            'position' : 'aa',
+            'describsion' : 'Just a test',
+        }
+        response = self.client.post(reverse('yishi:add_BuyInfo'), data)
+        self.assertEqual(response.status_code, 200)   
+
+    def tearDown(self) -> None:
+        self.client.logout()
+        self.user.delete()
+        return super().tearDown()
+
+class detailBIMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.username = '1111'
+        self.password = '123456'
+        self.user = User.objects.create_user(username=self.username, password=self.password)
+        self.client = Client()
+        self.client.login(username=self.username, password=self.password)
+
+    def test_detailBI(self):
+        bi = add_BuyInfo(self.user, 'Tesco', 'aaa', 'just a test')
+        response = self.client.get(reverse('yishi:detailBI', args=[bi.id]))
+        self.assertEqual(response.status_code, 200)
 
     def tearDown(self) -> None:
         self.client.logout()
@@ -216,7 +260,7 @@ class BuyTogetherMethodTest(unittest.TestCase):
     
 #     def test_detail(self):
 #         aa = add_product('aa', 1.2, 'abrand', 'just a test')
-#         response = self.client.get(reverse('yishi:detail'))
+#         response = self.client.get(reverse('yishi:detail', args=[aa.slug]))
 #         self.assertEqual(response.status_code, 200)
 
 # class postCommentPMethodTest(unittest.TestCase):
