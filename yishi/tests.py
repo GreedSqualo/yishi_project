@@ -277,17 +277,27 @@ class postcommentBMethodTest(unittest.TestCase):
         self.user.delete()
         return super().tearDown()    
 
-# class detailMethodTest(unittest.TestCase):
-#     def setUp(self):
-#         self.client = Client()
+class detailMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
     
-#     def test_detail(self):
-#         aa = add_product('aa', 1.2, 'abrand', 'just a test')
-#         response = self.client.get(reverse('yishi:detail', args=[aa.slug]))
-#         self.assertEqual(response.status_code, 200)
+    def test_detail(self):
+        aa = add_product('aa', 1.2, 'abrand', 'just a test')
+        response = self.client.get(reverse('yishi:detail', args=[aa.slug, 'China']))
+        self.assertEqual(response.status_code, 200)
 
-# class postCommentPMethodTest(unittest.TestCase):
-#     def setUp(self):
-#         self.client = Client()
+class postCommentPMethodTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
 
-#     def test_
+    def test_post_commentP(self):
+        aa = add_product('aa', 1.2, 'abrand', 'just a test')
+        add_star_rating(1.3, aa, 'China', 1)
+        data = {
+            'star_rating' : 1.3,
+            'content' : 'Just a test',
+            'country' : 'China',
+            'Pname' : aa,
+        }
+        response = self.client.post(reverse('yishi:post_commentP', args=[aa.slug]), data)
+        self.assertEqual(response.status_code, 200)
