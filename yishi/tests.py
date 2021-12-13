@@ -301,3 +301,23 @@ class postCommentPMethodTest(unittest.TestCase):
         }
         response = self.client.post(reverse('yishi:post_commentP', args=[aa.slug]), data)
         self.assertEqual(response.status_code, 200)
+
+class deleteBuyInfo(unittest.TestCase):
+    def setUp(self):
+        self.username = '1111'
+        self.password = '123456'
+        self.user = User.objects.create_user(username=self.username, password=self.password)
+        self.client = Client()
+        self.client.login(username=self.username, password=self.password)
+
+    def test_delete_BI(self):
+        bi = add_BuyInfo(self.user, 'Tesco', 'aaa', 'just a test')
+        response = self.client.get(reverse('yishi:delete_BI', args=[bi.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def tearDown(self) -> None:
+        self.client.logout()
+        self.user.delete()
+        return super().tearDown()
+
+    
