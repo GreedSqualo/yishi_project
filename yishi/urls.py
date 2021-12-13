@@ -19,4 +19,5 @@ urlpatterns = [
     path('add_BuyInfo/', views.add_BuyInfo, name='add_BuyInfo'),
     path('detailBI/<int:id>/', views.detailBI, name='detailBI'),
     path('post_commentB/<int:id>/', views.post_commentB, name='post_commentB'),
+    path('delete_BI/<int:id>/', views.delete_BI, name='delete_BI'),
 ]

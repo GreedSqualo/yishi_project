@@ -22,6 +22,12 @@
                 {% else %}
                     <p class="detail" > Post a comment to get more information.... </p>
                 {% endif %}
+
+                <br/>
+                {% if author %}
+                <a class="addNew inputWord" href="{% url "yishi:delete_BI" BuyInfo.id %}">delete</a>
+                {% endif %}
+
             </div>
             <br/>
         </div>

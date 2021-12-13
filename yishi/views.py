@@ -251,6 +251,7 @@ def detailBI(request, id):
     currentUser = request.user
     user = User.objects.get(username=currentUser)
     tag = False
+    author = False
     try:
         buyInf = BuyInfo.objects.get(id=id)
         commentB_List = commentB.objects.filter(Bid = buyInf)
@@ -263,13 +264,25 @@ def detailBI(request, id):
                 tag = True
         if user == buyInf.user:
             tag = True
+            author = True
     except commentB.DoesNotExist:
         context_dict['comments'] = None
     except BuyInfo.DoesNotExist:
         context_dict['BuyInfo'] = None
     context_dict['tag'] = tag
+    context_dict['author'] = author
     context_dict['n'] = n
     return render(request, 'yishi/detailBI.html', context = context_dict)
+
+@login_required
+def delete_BI(request, id):
+    try:
+        buyInf = BuyInfo.objects.get(id=id)
+        buyInf.delete()
+    except BuyInfo.DoesNotExist:
+        buyInf = None
+        buyInf.delete()
+    return render(request, 'yishi/buyTogether.html')
 
 @login_required
 def post_commentB(request, id):
