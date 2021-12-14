@@ -20,4 +20,5 @@ urlpatterns = [
     path('detailBI/<int:id>/', views.detailBI, name='detailBI'),
     path('post_commentB/<int:id>/', views.post_commentB, name='post_commentB'),
     path('delete_BI/<int:id>/', views.delete_BI, name='delete_BI'),
+    path('update_BI/<int:id>/', views.update_BI, name="update_BI"),
 ]

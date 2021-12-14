@@ -217,6 +217,7 @@ def profile(request):
 def buyTogether(request):
     context_dict = {}
     if request.method == 'POST':
+        keyword = ""
         keyword = request.POST.get('KeyWord')
         try:
             BuyInfo_list = BuyInfo.objects.filter(Q(supermarket__icontains=keyword)|Q(position__icontains=keyword)|Q(postcode__icontains=keyword))
@@ -281,8 +282,32 @@ def delete_BI(request, id):
         buyInf.delete()
     except BuyInfo.DoesNotExist:
         buyInf = None
-        buyInf.delete()
+        return HttpResponse("No such item!")
     return render(request, 'yishi/buyTogether.html')
+
+@login_required
+def update_BI(request, id):
+    BuyInfo_form = BuyInfoForm()
+    try:
+        buyInf = BuyInfo.objects.get(id=id)
+        if request.method == "POST":
+            BuyInfo_form = BuyInfoForm(request.POST)
+            if BuyInfo_form.is_valid():
+                buyInf.supermarket = request.POST['supermarket']
+                buyInf.position = request.POST['position']
+                buyInf.time = request.POST['time']
+                buyInf.postcode = request.POST['postcode']
+                buyInf.describsion = request.POST['describsion']
+                buyInf.save()
+                messages.success(request, 'Thank you for post you order information !')
+                return redirect('yishi:detailBI', id=id)
+            else:
+                print(BuyInfo_form.errors) 
+        else:
+            return render(request, 'yishi/update_BI.html', context = {'BuyInfo':buyInf, 'BuyInfo_form': BuyInfo_form})
+    except BuyInfo.DoesNotExist:
+        return HttpResponse("No such item!")
+    
 
 @login_required
 def post_commentB(request, id):

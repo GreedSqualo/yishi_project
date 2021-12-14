@@ -25,7 +25,8 @@
 
                 <br/>
                 {% if author %}
-                <a class="addNew inputWord" href="{% url "yishi:delete_BI" BuyInfo.id %}">delete</a>
+                    <a class="addNew inputWord" href="{% url "yishi:delete_BI" BuyInfo.id %}">Delete</a>
+                    <a class="addNew inputWord" href="{% url "yishi:update_BI" BuyInfo.id %}">Update</a>
                 {% endif %}
 
             </div>
