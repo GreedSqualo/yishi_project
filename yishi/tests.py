@@ -320,4 +320,27 @@ class deleteBuyInfo(unittest.TestCase):
         self.user.delete()
         return super().tearDown()
 
+class updateBuyInfo(unittest.TestCase):
+    def setUp(self):
+        self.username = '1111'
+        self.password = '123456'
+        self.user = User.objects.create_user(username=self.username, password=self.password)
+        self.client = Client()
+        self.client.login(username=self.username, password=self.password)
     
+    def test_Add_BuyInfo(self):
+        aa = add_BuyInfo(self.user, 'Tesco', 'aaa', 'just a test')
+        data = {
+            'supermarket' : 'Tesco',
+            'postcode' : 'AAAA',
+            'time': timezone.now(),
+            'position' : 'aa',
+            'describsion' : 'Just a test',
+        }
+        response = self.client.post(reverse('yishi:update_BI', args=[aa.id]), data)
+        self.assertEqual(response.status_code, 200)   
+
+    def tearDown(self) -> None:
+        self.client.logout()
+        self.user.delete()
+        return super().tearDown()
